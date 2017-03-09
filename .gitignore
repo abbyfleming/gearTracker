@@ -1,0 +1,7 @@
+.DS_Store
+__pycache__
+*.db
+*.db-journal
+configuration.py
+db.sqlite3
+migrations/
