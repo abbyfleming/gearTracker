@@ -12,7 +12,7 @@ class Camera(models.Model):
 	Properties: customer - FK to customer
 				camera_brand - FK to camera brand
 				camera_model - string
-				purchase_date - datefield
+				purchase_date - datefield, optional
 					
 	Methods: __str__ Returns a customer's first and last name  
 	"""
@@ -20,7 +20,7 @@ class Camera(models.Model):
 	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 	camera_brand = models.ForeignKey(CameraBrand, on_delete=models.CASCADE)
 	camera_model = models.CharField(max_length=35)
-	purchase_date =  models.DateField(auto_now=False, auto_now_add=False)
+	purchase_date =  models.DateField(auto_now=False, auto_now_add=False, null=True , blank=True)
 
 	def __str__(self):
 		return "{} {}".format(self.camera_brand.name, self.camera_model)

@@ -14,5 +14,7 @@ urlpatterns = [
     # Register
     url(r'^register/', views.register_view.Register.as_view(), name='register'),
     url(r'^register_customer/', views.register_view.register_customer, name='register_customer'),
-    
+
+    # Create Camera Brand
+    url(r'^camera_brand/', views.camera_brand_view.CameraBrandView.as_view() , name='camera_brand'),
 ]
