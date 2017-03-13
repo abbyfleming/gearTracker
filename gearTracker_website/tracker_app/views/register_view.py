@@ -18,7 +18,7 @@ class Register(TemplateView):
 def register_customer(request):
     """
     Purpose: Register a customer and immediently login
-    Author: Abby
+    Author: @abbyfleming
     """
     # create_user is what holds the username/password. (Django magic)
     # then, we pass that into the 1:1 field on our model, Customer
@@ -27,11 +27,12 @@ def register_customer(request):
     data = request.POST
 
     new_user = User.objects.create_user(
-        username = data['username'], 
-        email = data['email'],
-        password = data['password'],
         first_name = data['first_name'],
         last_name = data['last_name'],
+        email = data['email'],
+        username = data['username'], 
+        password = data['password'],
+
         )
 
     Customer.objects.create(
@@ -39,3 +40,6 @@ def register_customer(request):
         )
 
     return login_view.login_customer(request)
+
+
+    

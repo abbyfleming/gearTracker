@@ -8,7 +8,7 @@ class Customer(models.Model):
 	
 	Purpose: The Customer model will hold information to allow a customer to register for the website. It utilizes django's User class, but it set up in this way to allow future growth for the customer's fields.
 
-	Properties: user - one to one field on User
+	Properties: user - one to one field on User (first_name, last_name, email, username, password)
 	
 	Methods: __str__ Returns a customer's first and last name  
 	"""

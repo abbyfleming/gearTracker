@@ -4,5 +4,26 @@
 
 <h1>Register</h1>
 
-{% endblock %}
+<form action="{% url 'tracker_app:register_customer' %}" method="post">
+	{% csrf_token %}
+	
+	<label for="firstname">First Name: </label>
+	<input id="first_name" type="text" name="first_name" value="">
 
+	<label for="lastname">Last Name: </label>
+	<input id="last_name" type="text" name="last_name" value="">	
+
+	<label for="email">Email: </label>
+	<input id="email" type="text" name="email" value="">
+
+    <label for="username">Username: </label>
+    <input id="username" type="text" name="username" value="">
+    
+    <label for="password">Password: </label>
+    <input id="password" type="password" name="password" value="">
+
+    <input type="submit" value="OK">
+
+</form>
+
+{% endblock %}
