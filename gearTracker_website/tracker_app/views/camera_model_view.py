@@ -11,7 +11,7 @@ from tracker_app.models import Customer
 
 class CameraModelView(TemplateView):
     """
-    Purpose: CAMERA MODEL: D750, D700...
+    Purpose: CAMERA MODEL: D750, D700... 
     Methods: post, get
     Author: @abbyfleming
     """
@@ -39,16 +39,14 @@ class CameraModelView(TemplateView):
         date = data['purchase_date']
     
         # Find the values of the FK
-        customer_fk = Customer.objects.get(user=request.user.pk)     
-        make_fk = CameraMake.objects.get(pk=make)
+        customer = Customer.objects.get(user=request.user.pk)     
+        make = CameraMake.objects.get(pk=make)
 
 
-        print("*****customer_fk*****", customer_fk)
-        
         # Create the camera model!
         create_camera_model = CameraModel.objects.create(
-            customer = customer_fk,
-            camera_make = make_fk,
+            customer = customer,
+            camera_make = make,
             name = model,
             purchase_date =  date,
             )
