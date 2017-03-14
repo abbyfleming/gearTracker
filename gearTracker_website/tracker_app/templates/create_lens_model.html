@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+	<h1>Lens Model</h1>
+
+	<form action="{% url 'tracker_app:lens' %}" method="post">
+		{% csrf_token %}
+
+		<label for="camera_make">Mount: </label>
+		<select id="camera_make_id" name="camera_list">	
+			{% for camera in camera_make %}
+				<option value="{{camera.id}}">{{camera.name}}</option>
+			{% endfor %}
+		</select>
+
+		<label for="camera_make">Make: </label>
+		<select id="camera_make_id" name="lens_list">	
+			{% for lens in lens_make %}
+				<option value="{{lens.id}}">{{lens.name}}</option>
+			{% endfor %}
+		</select>
+
+		<label for="min_focal">Min Focal: </label>
+		<input id="min_focal" type="text" name="min_focal" value="">
+
+		<label for="max_focal">Max Focal: </label>
+		<input id="max_focal" type="text" name="max_focal" value="">
+
+		<label for="aperature">Aperature: </label>
+		<input id="aperature" type="number" step="0.2" min="1" name="aperature" value="">
+
+		<label for="purchase_date">Purchase Date: </label>
+		<input id="purchase_date" type="date" name="purchase_date" value="">
+
+		<input type="submit" value="OK">
+
+	</form>
+
+{% endblock %}
+

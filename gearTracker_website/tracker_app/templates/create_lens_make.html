@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+	<h1>Create Lens Brands</h1>
+
+	<form action="{% url 'tracker_app:add-lens-make' %}" method="post">
+		{% csrf_token %}
+	    
+	    <label for="lens_make">Lens Make: </label>
+	    <input id="lens_make" type="text" name="lens_make" value="">
+
+	    <input type="submit" value="OK">
+
+	</form>
+
+	
+	<h2>Lens Brands in DB</h2>
+
+		{% for lens in lens_make %}
+			{{lens.name}}
+		{% endfor %}
+
+{% endblock %}
+
