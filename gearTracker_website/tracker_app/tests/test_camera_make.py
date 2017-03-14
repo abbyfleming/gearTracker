@@ -4,12 +4,12 @@ from django.contrib.auth.models import User
 import sys 
 sys.path.append('../') 
 
-from tracker_app.models.camera_brand import CameraBrand
+from tracker_app.models.camera_make import CameraMake
 import datetime
 
 # python manage.py test tracker_app
 
-class TestCameraBrand(TestCase):
+class TestCameraMake(TestCase):
 	"""
 	Purpose: Test Customer
 	Author: Abby
@@ -21,16 +21,16 @@ class TestCameraBrand(TestCase):
 	@classmethod
 	def setUpTestData(self):
 		
-		self.nikon = CameraBrand(
-			camera_brand_name = "Nikon"
+		self.nikon = CameraMake(
+			name = "Nikon"
 			)
 
 
 	def test_nikon_is_instance_of_camera_brand(self):
-		self.assertIsInstance(self.nikon, CameraBrand)
+		self.assertIsInstance(self.nikon, CameraMake)
 	
 	def test_camera_has_brand_has_name(self):
-		self.assertEqual("Nikon", self.nikon.camera_brand_name)
+		self.assertEqual("Nikon", self.nikon.name)
 
 	
 

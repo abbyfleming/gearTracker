@@ -16,6 +16,7 @@ class LensModel(models.Model):
 
 	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 	lens_make = models.ForeignKey(LensMake, on_delete=models.CASCADE)
+	name = models.CharField(max_length=70)
 	min_focal_length = models.PositiveIntegerField()
 	max_focal_length = models.PositiveIntegerField()
 	aperature = models.DecimalField(decimal_places=1, max_digits=5)
@@ -23,8 +24,9 @@ class LensModel(models.Model):
 
 	
 	def __str__(self):
-		return "{} {} {} {}".format(
+		return "{} {} {} {} {}".format(
 							self.lens_make.name, 
+							self.lens.name,
 							self.min_focal_length, 
 							self.max_focal_length,
 							self.aperature)

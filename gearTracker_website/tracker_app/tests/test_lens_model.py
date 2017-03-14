@@ -5,13 +5,13 @@ import sys
 sys.path.append('../') 
 
 from tracker_app.models.customer import Customer
-from tracker_app.models.lens_brand import LensBrand
-from tracker_app.models.lens import Lens
+from tracker_app.models.lens_make import LensMake
+from tracker_app.models.lens_model import LensModel
 
 
 # python manage.py test tracker_app
 
-class TestCameraBrand(TestCase):
+class TestLensModel(TestCase):
 	"""
 	Purpose: Test Customer
 	Author: Abby
@@ -40,13 +40,13 @@ class TestCameraBrand(TestCase):
 			)
 
 		
-		self.nikkor = LensBrand(
-			lens_brand_name = "Nikkor"
+		self.nikkor = LensMake(
+			name = "Nikkor"
 			)
 
-		self.zoom = Lens(
+		self.zoom = LensModel(
 			customer = self.suzy,
-			lens_brand = self.nikkor,
+			lens_make = self.nikkor,
 			min_focal_length = 70,
 			max_focal_length = 200,
 			aperature = 2.8,
@@ -55,13 +55,13 @@ class TestCameraBrand(TestCase):
 
 
 	def test_zoom_is_instance_of_lens(self):
-		self.assertIsInstance(self.zoom, Lens)
+		self.assertIsInstance(self.zoom, LensModel)
 	
 	def test_lens_has_customer(self):
 		self.assertEqual("Suzy", self.zoom.customer.user.first_name)	
 
 	def test_lens_has_brand(self):
-		self.assertEqual("Nikkor", self.zoom.lens_brand.lens_brand_name)
+		self.assertEqual("Nikkor", self.zoom.lens_make.name)
 
 	def test_lens_has_min_focal_length(self):
 		self.assertEqual(70, self.zoom.min_focal_length)
