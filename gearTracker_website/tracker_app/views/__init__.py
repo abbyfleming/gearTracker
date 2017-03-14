@@ -5,3 +5,6 @@ from .register_view import Register
 # Camera 
 from .camera_make_view import CameraMakeView
 from .camera_model_view import CameraModelView
+
+# Lens
+from .lens_make_view import LensMakeView
