@@ -23,9 +23,6 @@ class LensModelView(TemplateView):
         # Fetch the camera brands
         self.all_lens_makes = LensMake.objects.all()
         self.all_camera_makes = CameraMake.objects.all()
-
-
-        print("*****self.all_lens_makes*****", self.all_lens_makes)
         
         return render(
             request, 'create_lens_model.html',
@@ -47,16 +44,16 @@ class LensModelView(TemplateView):
         purchase = data['purchase_date']
     
         # Find the values of the FK
-        customer_fk = Customer.objects.get(user=request.user.pk) 
-        camera_fk = CameraMake.objects.get(pk=mount)    
-        lens_fk = LensMake.objects.get(pk=make)
+        customer = Customer.objects.get(user=request.user.pk) 
+        camera = CameraMake.objects.get(pk=mount)    
+        lens = LensMake.objects.get(pk=make)
 
 
         # Create the lens!
         create_camera_model = LensModel.objects.create(
-            customer = customer_fk,
-            mount = camera_fk,
-            lens_make = lens_fk,
+            customer = customer,
+            mount = camera,
+            lens_make = lens,
             min_focal_length = min_focal,
             max_focal_length = max_focal,
             aperature = aperature,
