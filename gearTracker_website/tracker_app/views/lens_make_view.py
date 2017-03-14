@@ -9,7 +9,7 @@ from tracker_app.models import LensMake
 
 class LensMakeView(TemplateView):
     """
-    Purpose: All the user to view and create lens makes. ie: Tamron, Petzel
+    Purpose: LENS MAKE: Tamron, Petzel...
     Methods: post, get
     Author: @abbyfleming
     """

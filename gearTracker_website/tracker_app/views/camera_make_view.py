@@ -9,7 +9,7 @@ from tracker_app.models import CameraMake
 
 class CameraMakeView(TemplateView):
     """
-    Purpose: All the user to view and create camera makes. ie: Nikon, Canon, etc.
+    Purpose: CAMERA MAKE: Nikon, Cannon...
     Methods: post, get
     Author: @abbyfleming
     """

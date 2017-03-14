@@ -11,7 +11,7 @@ from tracker_app.models import Customer
 
 class CameraModelView(TemplateView):
     """
-    Purpose: Post and get Camera Models ie: D700, D750
+    Purpose: CAMERA MODEL: D750, D700...
     Methods: post, get
     Author: @abbyfleming
     """
@@ -32,6 +32,7 @@ class CameraModelView(TemplateView):
     def post(self, request):
         data = request.POST
 
+
         # Fetch the data from the Form
         make = data['camera_list']
         model = data['camera_model']
@@ -41,12 +42,15 @@ class CameraModelView(TemplateView):
         customer_fk = Customer.objects.get(user=request.user.pk)     
         make_fk = CameraMake.objects.get(pk=make)
 
+
+        print("*****customer_fk*****", customer_fk)
+        
         # Create the camera model!
         create_camera_model = CameraModel.objects.create(
-            customer=customer_fk,
-            camera_model=make_fk,
-            name=model,
-            purchase_date=date,
+            customer = customer_fk,
+            camera_make = make_fk,
+            name = model,
+            purchase_date =  date,
             )
 
         # Redirect to same page

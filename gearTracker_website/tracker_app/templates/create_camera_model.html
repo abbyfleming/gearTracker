@@ -2,7 +2,7 @@
 
 {% block content %}
 
-	<h1>Register Lens</h1>
+	<h1>Register Camera</h1>
 
 	<form action="{% url 'tracker_app:camera' %}" method="post">
 		{% csrf_token %}
@@ -15,7 +15,7 @@
 			{% endfor %}
 		</select>
 
-		<label for="camera_model">Model: </label>
+		<label for="camera_model">Name: </label>
 		<input id="camera_model" type="text" name="camera_model" value="">
 
 		<label for="purchase_date">Purchase Date: </label>
