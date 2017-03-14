@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class LensBrand(models.Model):
+class LensMake(models.Model):
 	"""
 	Author: @abbyfleming
 	
@@ -12,7 +12,7 @@ class LensBrand(models.Model):
 	Methods: __str__ Returns a lens brand name
 	"""
 
-	lens_brand_name = models.CharField(max_length=70)
+	name = models.CharField(max_length=70)
 	
 	def __str__(self):
-		return "{}".format(self.lens_brand_name)
+		return "{}".format(self.name)

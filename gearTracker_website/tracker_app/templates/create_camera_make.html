@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+	<h1>Create Camera Brand</h1>
+
+	<form action="{% url 'tracker_app:add-camera-make' %}" method="post">
+		{% csrf_token %}
+	    
+	    <label for="camera_make">Camera Make: </label>
+	    <input id="camera_make" type="text" name="camera_make" value="">
+
+	    <input type="submit" value="OK">
+
+	</form>
+
+	
+	<h2>Camera Brands in DB</h2>
+
+		{% for camera in camera_make %}
+			{{camera.name}}
+		{% endfor %}
+
+{% endblock %}
+

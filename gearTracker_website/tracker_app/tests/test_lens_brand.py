@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 import sys
 sys.path.append('../')
 
-from tracker_app.models.lens_brand import LensBrand
+from tracker_app.models.lens_model import LensModel
 
 
 
-class TestLensBrand(TestCase):
+class TestLensMake(TestCase):
 	"""
 	Purpose: Test Brand
 	Author: Abby
@@ -20,12 +20,12 @@ class TestLensBrand(TestCase):
 	@classmethod
 	def setUpTestData(self):
 
-		self.nikkor = LensBrand(
-			lens_brand_name = "Nikkor"
+		self.nikkor = LensModel(
+			name = "Nikkor"
 			)
 
 	def test_nikkor_is_instance_of_lens_brand(self):
-		self.assertIsInstance(self.nikkor, LensBrand)
+		self.assertIsInstance(self.nikkor, LensModel)
 
 	def test_lens_brand_has_name(self):
-		self.assertEqual("Nikkor", self.nikkor.lens_brand_name)
+		self.assertEqual("Nikkor", self.nikkor.name)
