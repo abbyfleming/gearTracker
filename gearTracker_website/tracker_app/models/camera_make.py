@@ -15,4 +15,4 @@ class CameraMake(models.Model):
 	name = models.CharField(max_length=70)
 	
 	def __str__(self):
-		return "{}".format(self.camera_make)
+		return "{}".format(self.name)

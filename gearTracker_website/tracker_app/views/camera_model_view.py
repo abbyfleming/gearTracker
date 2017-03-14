@@ -5,53 +5,52 @@ from django.contrib.auth import logout, login, authenticate
 from django.http import HttpResponseRedirect
 
 from tracker_app.models import CameraMake
+from tracker_app.models import CameraModel
 from tracker_app.models import Customer
 
 
 class CameraModelView(TemplateView):
     """
-    Purpose: Post and get Camera Models
+    Purpose: Post and get Camera Models ie: D700, D750
     Methods: post, get
     Author: @abbyfleming
     """
 
-    template_name = 'create_camera.html'
+    template_name = 'create_camera_model.html'
 
     def get(self, request):
 
         # Fetch the camera brands
-        self.all_camera_brands = CameraMake.objects.all()
+        self.all_camera_makes = CameraMake.objects.all()
 
         return render(
-            request, 'create_camera.html',
-            {'camera_brand': self.all_camera_brands,}
-
+            request, 'create_camera_model.html',
+            {'camera_make': self.all_camera_makes,}
             )
-
 
 
     def post(self, request):
         data = request.POST
 
-        print("*****data*****", data)
-        
-        brand = data['camera_list']
+        # Fetch the data from the Form
+        make = data['camera_list']
         model = data['camera_model']
         date = data['purchase_date']
+    
+        # Find the values of the FK
+        customer_fk = Customer.objects.get(user=request.user.pk)     
+        make_fk = CameraMake.objects.get(pk=make)
 
-        current_customer = Customer.objects.get(user=request.user.pk)
-
-        print("*****current_customer*****", current_customer)
-        
-        create_camera_brand = CameraMake.objects.create(
-            camera_brand_name=brand,
-            camera_model=model,
+        # Create the camera model!
+        create_camera_model = CameraModel.objects.create(
+            customer=customer_fk,
+            camera_model=make_fk,
+            name=model,
             purchase_date=date,
-            customer=current_customer,
             )
 
         # Redirect to same page
-        return HttpResponseRedirect("/camera_brand")
+        return HttpResponseRedirect("/add-camera")
 
 
     
