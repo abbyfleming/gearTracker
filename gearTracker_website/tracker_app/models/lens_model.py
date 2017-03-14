@@ -1,9 +1,9 @@
 from django.db import models
 from .customer import Customer
-from .lens_brand import LensBrand
+from .lens_make import LensMake
 
 
-class Lens(models.Model):
+class LensModel(models.Model):
 	"""
 	Author: @abbyfleming
 	
@@ -15,7 +15,7 @@ class Lens(models.Model):
 	"""
 
 	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-	lens_brand = models.ForeignKey(LensBrand, on_delete=models.CASCADE)
+	lens_make = models.ForeignKey(LensMake, on_delete=models.CASCADE)
 	min_focal_length = models.PositiveIntegerField()
 	max_focal_length = models.PositiveIntegerField()
 	aperature = models.DecimalField(decimal_places=1, max_digits=5)
@@ -24,7 +24,7 @@ class Lens(models.Model):
 	
 	def __str__(self):
 		return "{} {} {} {}".format(
-							self.lens_brand.lens_brand_name, 
+							self.lens_make.name, 
 							self.min_focal_length, 
 							self.max_focal_length,
 							self.aperature)

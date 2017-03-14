@@ -5,8 +5,9 @@ import sys
 sys.path.append('../') 
 
 from tracker_app.models.customer import Customer
-from tracker_app.models.camera_brand import CameraBrand
-from tracker_app.models.camera import Camera
+from tracker_app.models.camera import CameraMake
+from tracker_app.models.camera_brand import CameraModel
+
 import datetime
 
 # python manage.py test tracker_app
@@ -40,11 +41,11 @@ class TestCameraBrand(TestCase):
 			)
 
 		
-		self.nikon = CameraBrand(
+		self.nikon = CameraMake(
 			camera_brand_name = "Nikon"
 			)
 
-		self.d700 = Camera(
+		self.d700 = CameraModel(
 			customer = self.suzy,
 			camera_brand = self.nikon,
 			camera_model = "D700",
@@ -53,7 +54,7 @@ class TestCameraBrand(TestCase):
 
 
 	def test_d700_is_instance_of_camera(self):
-		self.assertIsInstance(self.d700, Camera)
+		self.assertIsInstance(self.d700, CameraMake)
 	
 	def test_camera_has_customer(self):
 		self.assertEqual("Suzy", self.d700.customer.user.first_name)

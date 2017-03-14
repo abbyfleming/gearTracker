@@ -1,7 +1,6 @@
 from django.conf.urls import url
 from . import views
 
-#url for each function which calls the view/function
 
 app_name = 'tracker_app'
 urlpatterns = [
@@ -15,6 +14,8 @@ urlpatterns = [
     url(r'^register/', views.register_view.Register.as_view(), name='register'),
     url(r'^register_customer/', views.register_view.register_customer, name='register_customer'),
 
-    # Create Camera Brand
-    url(r'^camera_brand/', views.camera_brand_view.CameraBrandView.as_view() , name='camera_brand'),
+    # Camera 
+    url(r'^add-camera/', views.camera_model_view.CameraModelView.as_view() , name='camera'),
+    url(r'^add-camera-make/', views.camera_make_view.CameraMakeView.as_view() , name='add-camera-make'),
+
 ]

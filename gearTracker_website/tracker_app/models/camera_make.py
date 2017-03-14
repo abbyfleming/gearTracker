@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class CameraBrand(models.Model):
+class CameraMake(models.Model):
 	"""
 	Author: @abbyfleming
 	
@@ -12,7 +12,7 @@ class CameraBrand(models.Model):
 	Methods: __str__ Returns a camera brand name
 	"""
 
-	camera_brand_name = models.CharField(max_length=70)
+	name = models.CharField(max_length=70)
 	
 	def __str__(self):
-		return "{}".format(self.camera_brand_name)
+		return "{}".format(self.camera_make)
