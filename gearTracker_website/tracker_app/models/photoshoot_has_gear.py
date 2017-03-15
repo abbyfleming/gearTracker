@@ -11,4 +11,6 @@ class PhotoshootHasGear(models.Model):
 	camera = models.ManyToManyField(CameraModel,blank=True)
 	lens = models.ManyToManyField(LensModel,blank=True)
 
+	def __str__(self):
+		return "{}".format(self.camera.name)
 

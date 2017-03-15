@@ -81,7 +81,6 @@ class TestLensModel(TestCase):
 		self.wedding_has_gear = PhotoshootHasGear.objects.create(
 			event = self.wedding, 
 			)
-
 		self.wedding_has_gear.camera.add(self.d700)
 		self.wedding_has_gear.lens.add(self.zoom)
 
@@ -96,11 +95,7 @@ class TestLensModel(TestCase):
 		self.photoshoot.save()
 
 
-	def test_zoom_is_instance_of_lens(self):
-		self.assertIsInstance(self.zoom, LensModel)
-	
-	def test_lens_has_customer(self):
-		self.assertEqual("Suzy", self.zoom.customer.user.first_name)	
+
 
 
 	

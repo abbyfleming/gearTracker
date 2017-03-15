@@ -1,7 +1,6 @@
 from django.conf.urls import url
 from . import views
 
-
 app_name = 'tracker_app'
 urlpatterns = [
     url(r'^$', views.index_view.Index.as_view(), name='index'),
@@ -21,5 +20,9 @@ urlpatterns = [
     # Lens 
     url(r'^add-lens/', views.lens_model_view.LensModelView.as_view() , name='lens'),
     url(r'^add-lens-make/', views.lens_make_view.LensMakeView.as_view() , name='add-lens-make'),
+
+    # Event
+    url(r'^add-event/', views.event_view.EventView.as_view() , name='event'),
+
 
 ]
