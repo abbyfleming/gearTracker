@@ -9,3 +9,6 @@ from .camera_model_view import CameraModelView
 # Lens
 from .lens_make_view import LensMakeView
 from .lens_model_view import LensModelView
+
+# Event
+from .event_view import EventView
