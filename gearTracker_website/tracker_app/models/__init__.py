@@ -11,4 +11,4 @@ from .lens_model import LensModel
 # Events / Photoshoots
 from .event import Event
 from .photoshoot import Photoshoot
-from .photoshoot_has_gear import PhotoshootHasGear
+from .event_has_gear import PhotoshootHasGear

@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+	<h1>Create Event</h1>
+
+	<form action="{% url 'tracker_app:event_gear' %}" method="post">
+		{% csrf_token %}
+	    
+	    <label for="event">Event Name: </label>
+	    <input id="event" type="text" name="event" value="">
+
+	    <input type="submit" value="OK">
+
+	</form>
+
+	
+	<h2>Events in DB</h2>
+
+		{% for e in event %}
+			{{e.name}}
+		{% endfor %}
+
+{% endblock %}
+
