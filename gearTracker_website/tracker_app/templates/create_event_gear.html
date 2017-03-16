@@ -2,24 +2,30 @@
 
 {% block content %}
 
-	<h1>Create Event</h1>
+	<h1></h1>
 
 	<form action="{% url 'tracker_app:event_gear' %}" method="post">
 		{% csrf_token %}
-	    
-	    <label for="event">Event Name: </label>
-	    <input id="event" type="text" name="event" value="">
+
+	    <select id="event_id" name="event">	
+			{% for e in event %}
+				<option value="{{e.id}}">{{e.name}}</option>
+			{% endfor %}
+		</select>
+
+		<h3>Lens</h3>
+		{% for l in lens %}
+			<input type="checkbox" name="lens" value="{{l.id}}" />{{l.lens_make}} {{l.min_focal_length}} - {{l.max_focal_length}} {{l.aperature}}
+		{% endfor %}
+
+		<h3>Camera</h3>
+		{% for c in camera %}
+			<input type="checkbox" name="camera" value="{{c.id}}" />{{c.name}}
+		{% endfor %}
 
 	    <input type="submit" value="OK">
 
 	</form>
-
-	
-	<h2>Events in DB</h2>
-
-		{% for e in event %}
-			{{e.name}}
-		{% endfor %}
 
 {% endblock %}
 
