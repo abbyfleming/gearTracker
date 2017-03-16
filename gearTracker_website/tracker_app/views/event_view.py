@@ -26,7 +26,6 @@ class EventView(TemplateView):
             )
 
 
-
     def post(self, request):
         data = request.POST
 
@@ -37,7 +36,7 @@ class EventView(TemplateView):
             )
 
         # Redirect to same page
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect("/add-event")
 
 
     
