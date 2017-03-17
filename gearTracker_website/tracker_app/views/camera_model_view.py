@@ -42,7 +42,6 @@ class CameraModelView(TemplateView):
         customer = Customer.objects.get(user=request.user.pk)     
         make = CameraMake.objects.get(pk=make)
 
-
         # Create the camera model!
         create_camera_model = CameraModel.objects.create(
             customer = customer,
