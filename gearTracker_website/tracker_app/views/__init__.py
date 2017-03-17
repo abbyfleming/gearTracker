@@ -13,3 +13,4 @@ from .lens_model_view import LensModelView
 # Event
 from .event_view import EventView
 from .event_has_gear_view import EventHasGearView
+from .photoshoot_view import PhotoShootView

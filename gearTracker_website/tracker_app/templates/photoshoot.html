@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+	<h1>PhotoShoot!</h1>
+
+	<form action="{% url 'tracker_app:photoshoot' %}" method="post">
+		{% csrf_token %}
+
+		<label for="camera_make">Make: </label>
+
+		<select id="camera_make_id" name="camera_list">	
+			{% for camera in camera_make %}
+				<option value="{{camera.id}}">{{camera.name}}</option>
+			{% endfor %}
+		</select>
+
+		<label for="camera_model">Name: </label>
+		<input id="camera_model" type="text" name="camera_model" value="">
+
+		<label for="purchase_date">Purchase Date: </label>
+		<input id="purchase_date" type="date" name="purchase_date" value="">
+
+		<input type="submit" value="OK">
+
+	</form>
+
+{% endblock %}
+
