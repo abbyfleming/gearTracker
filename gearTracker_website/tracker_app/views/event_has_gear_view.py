@@ -47,11 +47,18 @@ class EventHasGearView(TemplateView):
         event_data = Event.objects.get(pk=event)
         print("*****event_data*****", event_data)
         
+        # Create the Event
+        event_has_gear = PhotoshootHasGear.objects.create(
+            event = event_data,
+        )
+        print("*** EVENT HAS NAME", event_has_gear.event.name)
+
         # Lenses 
         lens = request.POST.getlist('lens')
 
         for l in lens:
             lens_data = LensModel.objects.get(pk=l)
+            new_lens = event_has_gear.lens.add(lens_data)
             print("***get lens***", lens_data)        
 
         # Camera
@@ -59,19 +66,9 @@ class EventHasGearView(TemplateView):
         
         for c in camera:
             camera_data = CameraModel.objects.get(pk=c)
+            new_camera = event_has_gear.camera.add(camera_data)
             print("***get camera***", camera_data)
 
-
-        # print("Type of lens", type(lens))
-
-        #loop over lens and camera to pull the objects out.
-        # Find the FK information
-          
-        # create_event_has_gear = PhotoshootHasGear.objects.create(
-        #     event = event,
-        #     camera = camera,
-        #     lens = lens,
-        #     )
 
         # Redirect to same page
         return HttpResponseRedirect("/event-gear")
