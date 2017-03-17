@@ -36,37 +36,36 @@ class EventHasGearView(TemplateView):
             })
 
 
-    def post(self, request):
-        # data = request.POST
-        # print("*****data*****", data)
-        
-        lens = request.POST.getlist('lens')
-        print("*****lens*****", lens)
-        
-        camera = request.POST.getlist('camera')
-        print("*****camera*****", camera)
-        
-        # Fetch the data from the form
-        # event = data['event']
-        
-        for l in lens:
-            print("***lens index****", l)
+    
 
+    def post(self, request):
+        data = request.POST
+        print("*****data*****", data)
+        
+        # Event
+        event = data['event']
+        event_data = Event.objects.get(pk=event)
+        print("*****event_data*****", event_data)
+        
+        # Lenses 
+        lens = request.POST.getlist('lens')
+
+        for l in lens:
+            lens_data = LensModel.objects.get(pk=l)
+            print("***get lens***", lens_data)        
+
+        # Camera
+        camera = request.POST.getlist('camera')
+        
         for c in camera:
-            print("***camera index***", c)
+            camera_data = CameraModel.objects.get(pk=c)
+            print("***get camera***", camera_data)
+
 
         # print("Type of lens", type(lens))
 
-        # print("***first item in lens", data['lens'][0])
-
         #loop over lens and camera to pull the objects out.
-        
-
         # Find the FK information
-        # customer = Customer.objects.get(user=request.user.pk)
-        # event = Event.objects.get(pk=e)
-        # lens = LensModel.objects.get(pk=l)
-        # camera = CameraModel.objects.get(pk=c)
           
         # create_event_has_gear = PhotoshootHasGear.objects.create(
         #     event = event,
