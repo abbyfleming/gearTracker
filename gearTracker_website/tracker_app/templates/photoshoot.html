@@ -7,19 +7,20 @@
 	<form action="{% url 'tracker_app:photoshoot' %}" method="post">
 		{% csrf_token %}
 
-		<label for="camera_make">Make: </label>
-
-		<select id="camera_make_id" name="camera_list">	
-			{% for camera in camera_make %}
-				<option value="{{camera.id}}">{{camera.name}}</option>
+		<select id="event_id" name="event">	
+			{% for e in event %}
+				<option value="{{e.id}}">{{e.name}}</option>
 			{% endfor %}
 		</select>
 
-		<label for="camera_model">Name: </label>
-		<input id="camera_model" type="text" name="camera_model" value="">
+		<label for="client_name">Client Name: </label>
+		<input id="client_name" type="text" name="client_name" value="">
 
-		<label for="purchase_date">Purchase Date: </label>
-		<input id="purchase_date" type="date" name="purchase_date" value="">
+		<label for="location">Location: </label>
+		<input id="location" type="text" name="location" value="">
+
+		<label for="date">Date: </label>
+		<input id="date" type="date" name="date" value="">
 
 		<input type="submit" value="OK">
 
