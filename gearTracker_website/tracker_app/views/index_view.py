@@ -16,8 +16,8 @@ class Index(TemplateView):
   def get(self, request):
 
     self.all_event = Event.objects.all()
-    self.all_camera = CameraModel.objects.all()
-    self.all_lens = LensModel.objects.all()
+    self.all_camera = CameraModel.objects.all().filter(customer=request.user.pk)
+    self.all_lens = LensModel.objects.all().filter(customer=request.user.pk)
 
     return render(
         request, 'index.html',{
