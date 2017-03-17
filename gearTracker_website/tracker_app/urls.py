@@ -24,6 +24,7 @@ urlpatterns = [
     # Event
     url(r'^add-event/', views.event_view.EventView.as_view() , name='event'),
     url(r'^event-gear/', views.event_has_gear_view.EventHasGearView.as_view(), name='event_gear'),
+    url(r'^photoshoot/', views.photoshoot_view.PhotoShootView.as_view(), name='photoshoot'),
 
 
 ]
