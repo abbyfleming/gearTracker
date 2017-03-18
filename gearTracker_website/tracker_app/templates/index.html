@@ -1,36 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Gear Tracker</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'jumbotron-narrow.css' %}">
 </head>
 <body>
 
-	<h1>Gear Tracker</h1>
-
-	<h2>Index Page</h2>
+	{% include 'nav.html' %}
 
 	{% block content %}
 
-
-	<h2>Events</h2>
-		{% for e in event %}
-			<h3>{{e.name}}</h3>
-		{% endfor %}
-
-	<h2>Cameras</h2>
-		{% for c in camera %}
-			<h3>{{c.name}}</h3>
-		{% endfor %}
-
-	<h2>Lenses</h2>
-		{% for l in lens %}
-			<h3>{{l.lens_make}} {{l.min_focal_length}} - {{l.max_focal_length}} {{l.aperature}}</h3>
-		{% endfor %}
-
-
-
+	{% include 'home.html' %}
 
 	{% endblock%}
 
+<script
+  src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+  integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+  crossorigin="anonymous"></script>
+<script 
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+	crossorigin="anonymous"></script>
 </body>
 </html>

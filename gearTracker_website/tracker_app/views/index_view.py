@@ -19,6 +19,8 @@ class Index(TemplateView):
     self.all_camera = CameraModel.objects.all().filter(customer=request.user.pk)
     self.all_lens = LensModel.objects.all().filter(customer=request.user.pk)
 
+    print("*****self.all_lens*****", self.all_lens)
+
     return render(
         request, 'index.html',{
         'event': self.all_event,
