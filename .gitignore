@@ -5,3 +5,4 @@ __pycache__
 configuration.py
 db.sqlite3
 migrations/
+scraps
