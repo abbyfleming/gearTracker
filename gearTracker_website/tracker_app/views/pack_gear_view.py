@@ -24,16 +24,13 @@ class PackGearView(TemplateView):
     
     def get(self, request, id):
         # Fetch the event
-        print("*****id*****", id)
 
-        # Get only the correct photoshoot
+        # Get only photoshoot that's been clicked
         self.photoshoot = Photoshoot.objects.get(id=id)
-        print("*****self.photoshoot*****", self.photoshoot)
 
         # Get the event type
         self.event_id = PhotoshootHasGear.objects.filter(id=id).values('event_id')
         self.event = Event.objects.get(id=self.event_id)
-        print("*****self.event*****", self.event)
 
         # Get the Gear
         #self.gear_id = Photoshoot.objects.filter(gear_id=id).values('gear_id')
