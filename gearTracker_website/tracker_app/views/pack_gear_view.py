@@ -53,6 +53,21 @@ class PackGearView(TemplateView):
         data = request.POST
         print("*****pack*****")
 
+        camera = request.POST.getlist('camera')
+        print("*****camera*****", camera)
+
+        for c in camera:
+            pack_camera = LensModel.objects.filter(pk=c).update(safely_packed=True)
+            print("*****pack_camera*****", pack_camera)
+
         return HttpResponseRedirect(redirect_to='/')
+
+
+
+
+
+
+
+
 
 
