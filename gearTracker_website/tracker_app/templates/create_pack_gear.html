@@ -7,7 +7,6 @@
 	<p>Date: {{client_details.date}}</p>
 	<p>Location: {{client_details.location}}</p>
 	<p>Event Type: {{event.name}}</p>
-	<p>Event Id: {{event.id}}</p>
 
 <h2>Pack Gear</h2>
 
@@ -18,9 +17,9 @@
 			{{c.name}}<input type="checkbox" name="camera" value="{{c.id}}" />
 		{% endfor %}
 		
-<!--{% for l in lens %}
-			{{l.lens_make}} {{l.min_focal_length}} - {{l.max_focal_length}} {{l.aperature}}<input type="checkbox" name="vehicle" value="Bike"></br>
-		{% endfor %} -->
+		{% for l in lens %}
+			{{l.lens_make}} {{l.min_focal_length}} - {{l.max_focal_length}} {{l.aperature}}<input type="checkbox" name="lens" value="{{l.id}}"></br>
+		{% endfor %}
 
 		<input type="submit" value="OK">
 	</form>
