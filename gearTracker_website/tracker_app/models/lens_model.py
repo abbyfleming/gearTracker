@@ -22,7 +22,7 @@ class LensModel(models.Model):
 	min_focal_length = models.PositiveIntegerField()
 	max_focal_length = models.PositiveIntegerField()
 	aperature = models.DecimalField(decimal_places=1, max_digits=5)
-	purchase_date = models.DateField(auto_now=False)
+	# purchase_date = models.DateField(auto_now=False)
 
 	
 	def __str__(self):

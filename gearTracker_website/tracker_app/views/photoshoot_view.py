@@ -19,15 +19,16 @@ class PhotoShootView(TemplateView):
     Methods: post, get
     """
 
-    template_name = 'photoshoot.html'
+    template_name = 'create_photoshoot.html'
 
     def get(self, request):
 
         # Fetch the event
-        self.event = Event.objects.all()
+        self.event = PhotoshootHasGear.objects.all()
+        print("*****self.event*****", self.event)
  
         return render(
-            request, 'photoshoot.html',
+            request, 'create_photoshoot.html',
             {'event': self.event}
             )
 
@@ -41,10 +42,12 @@ class PhotoShootView(TemplateView):
         location = data['location']
         date =  data['date']
         event = data['event']
+        print("*****event*****", event)
 
         # Find the values of the FK
         current_user = Customer.objects.get(user=request.user.pk)
         current_gear = PhotoshootHasGear.objects.get(event=event)
+        print("*****current_gear*****", current_gear)
 
         create_photoshoot = Photoshoot.objects.create(
             customer = current_user,

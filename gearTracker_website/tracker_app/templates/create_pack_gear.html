@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<h2>Pack Gear</h2>
+		<p>Name: {{client_details.client_name}}</p>
+		<p>Date: {{client_details.date}}</p>
+		<p>Location: {{client_details.location}}</p>
+		<p>Gear Id: {{client_details.gear_id}}</p>
+		<p>Event Type: {{event.name}}</p>
+
+		{% for c in camera %}
+			<p>{{c.name}}</p>
+		{% endfor %}
+		
+		{% for l in lens %}
+			<p>{{l.lens_make}} {{l.min_focal_length}} - {{l.max_focal_length}} {{l.aperature}}</p>
+		{% endfor %}
+
+{% endblock %}

@@ -37,11 +37,9 @@ class LensModelView(TemplateView):
         # Fetch the data from the Form
         make = data['lens_list']
         mount = data['camera_list']
-        date = data['purchase_date']
         min_focal = data['min_focal']
         max_focal = data['max_focal']
         aperature = data['aperature']
-        purchase = data['purchase_date']
     
         # Find the values of the FK
         customer = Customer.objects.get(user=request.user.pk) 
@@ -57,7 +55,6 @@ class LensModelView(TemplateView):
             min_focal_length = min_focal,
             max_focal_length = max_focal,
             aperature = aperature,
-            purchase_date = purchase,
             )
 
         # Redirect to same page

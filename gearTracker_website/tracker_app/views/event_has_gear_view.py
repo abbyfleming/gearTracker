@@ -25,8 +25,8 @@ class EventHasGearView(TemplateView):
     def get(self, request):
 
         self.all_events = Event.objects.all()
-        self.all_lens = LensModel.objects.all()
-        self.all_camera = CameraModel.objects.all()
+        self.all_lens = LensModel.objects.all().filter(customer=request.user.pk)
+        self.all_camera = CameraModel.objects.all().filter(customer=request.user.pk)
         
         return render(
             request, 'create_event_gear.html', {
