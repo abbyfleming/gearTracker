@@ -28,4 +28,5 @@ urlpatterns = [
 
     # Pack Gear
     url(r'^pack-gear/(?P<id>\d+)/$', views.pack_gear_view.PackGearView.as_view(), name='pack_gear'),
+    
 ]

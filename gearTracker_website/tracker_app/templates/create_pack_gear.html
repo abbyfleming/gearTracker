@@ -2,18 +2,27 @@
 
 {% block content %}
 
+<h2>Session Info</h2>
+	<p>Name: {{client_details.client_name}}</p>
+	<p>Date: {{client_details.date}}</p>
+	<p>Location: {{client_details.location}}</p>
+	<p>Event Type: {{event.name}}</p>
+	<p>Event Id: {{event.id}}</p>
+
 <h2>Pack Gear</h2>
-		<p>Name: {{client_details.client_name}}</p>
-		<p>Date: {{client_details.date}}</p>
-		<p>Location: {{client_details.location}}</p>
-		<p>Event Type: {{event.name}}</p>
+
+	<form action="{% url 'tracker_app:pack_gear' event.id %}" method="post">
+		{% csrf_token %}
 
 		{% for c in camera %}
-			<p>{{c.name}}</p>
+			{{c.name}}<input type="checkbox" name="camera" value="{{c.id}}" />
 		{% endfor %}
 		
-		{% for l in lens %}
-			<p>{{l.lens_make}} {{l.min_focal_length}} - {{l.max_focal_length}} {{l.aperature}}</p>
-		{% endfor %}
+<!--{% for l in lens %}
+			{{l.lens_make}} {{l.min_focal_length}} - {{l.max_focal_length}} {{l.aperature}}<input type="checkbox" name="vehicle" value="Bike"></br>
+		{% endfor %} -->
+
+		<input type="submit" value="OK">
+	</form>
 
 {% endblock %}

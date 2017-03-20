@@ -35,14 +35,8 @@ class PackGearView(TemplateView):
         # Get the Gear
         #self.gear_id = Photoshoot.objects.filter(gear_id=id).values('gear_id')
         self.gear = PhotoshootHasGear.objects.get(event_id=self.event_id)
-        print("*****gear*****", self.gear)  
-        
         self.camera = self.gear.camera.all()
-        print("*****self.camera*****", self.camera)
-
         self.lens = self.gear.lens.all()
-        print("*****self.lens*****", self.lens)
-
 
         return render(
             request, 'create_pack_gear.html',{
@@ -54,17 +48,11 @@ class PackGearView(TemplateView):
             )
 
 
-    # def post(self, request):
-    #     data = request.POST
-    #     print("*****data*****", data)
 
-    #     #http://stackoverflow.com/questions/2417127/how-do-i-get-the-values-of-all-selected-checkboxes-in-a-django-request-post
+    def post(self, request, id):
+        data = request.POST
+        print("*****pack*****")
 
-    #     # Redirect to same page
-    #     return HttpResponseRedirect("/pack-gear")
+        return HttpResponseRedirect(redirect_to='/')
 
 
-    
-    
-
-  

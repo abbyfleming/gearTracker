@@ -13,7 +13,7 @@ class LensModel(models.Model):
 
 	Properties: 
 	
-	Methods: __str__ Returns a lens brand name
+	Methods: 
 	"""
 
 	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -22,7 +22,7 @@ class LensModel(models.Model):
 	min_focal_length = models.PositiveIntegerField()
 	max_focal_length = models.PositiveIntegerField()
 	aperature = models.DecimalField(decimal_places=1, max_digits=5)
-	# purchase_date = models.DateField(auto_now=False)
+	safely_packed = models.BooleanField(default=False)
 
 	
 	def __str__(self):
