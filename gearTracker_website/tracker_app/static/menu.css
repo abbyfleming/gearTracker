@@ -1,0 +1,16 @@
+.navbar, .dropdown-menu{
+  background: #fff;
+  border: none;
+  font-family: 'Hind Guntur', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.navbar-collapse {
+  text-align:center;
+}
+.navbar-nav {
+    display:inline-block;
+    float:none;
+}
+

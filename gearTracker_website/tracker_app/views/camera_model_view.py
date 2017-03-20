@@ -36,7 +36,6 @@ class CameraModelView(TemplateView):
         # Fetch the data from the Form
         make = data['camera_list']
         model = data['camera_model']
-        date = data['purchase_date']
     
         # Find the values of the FK
         customer = Customer.objects.get(user=request.user.pk)     
@@ -47,7 +46,6 @@ class CameraModelView(TemplateView):
             customer = customer,
             camera_make = make,
             name = model,
-            purchase_date =  date,
             )
 
         # Redirect to same page

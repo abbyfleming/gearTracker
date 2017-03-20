@@ -14,3 +14,7 @@ from .lens_model_view import LensModelView
 from .event_view import EventView
 from .event_has_gear_view import EventHasGearView
 from .photoshoot_view import PhotoShootView
+
+# Pack Gear
+from .pack_gear_view import PackGearView
+

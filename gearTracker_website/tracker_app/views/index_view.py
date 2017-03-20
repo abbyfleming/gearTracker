@@ -1,6 +1,10 @@
 from django.views.generic.base import TemplateView
 from django.shortcuts import render
 
+from tracker_app.models import Event
+from tracker_app.models import CameraModel
+from tracker_app.models import LensModel
+from tracker_app.models import PhotoshootHasGear
 
 class Index(TemplateView):
   '''
@@ -9,3 +13,23 @@ class Index(TemplateView):
   Author:
   '''
   template_name = "index.html"	
+
+  def get(self, request):
+
+    self.all_camera = CameraModel.objects.all().filter(customer=request.user.pk)
+    self.all_lens = LensModel.objects.all().filter(customer=request.user.pk)
+
+    # Show only the events for the user. 
+    self.customer_event = PhotoshootHasGear.objects.all().filter(camera=self.all_camera)
+
+    # Note to self: Sort by date for events:
+    # queryset = StoreEvent.objects.filter(stores__user=request.user).order_by('-date')
+    # http://stackoverflow.com/questions/761352/django-queryset-order
+
+    return render(
+        request, 'index.html',{
+        'event': self.customer_event,
+        'camera': self.all_camera,
+        'lens': self.all_lens,
+        }
+        )
