@@ -15,10 +15,12 @@ class Index(TemplateView):
   template_name = "index.html"	
 
   def get(self, request):
-    
-    self.customer_event = PhotoshootHasGear.objects.all()
+
     self.all_camera = CameraModel.objects.all().filter(customer=request.user.pk)
     self.all_lens = LensModel.objects.all().filter(customer=request.user.pk)
+
+    # Show only the events for the user. 
+    self.customer_event = PhotoshootHasGear.objects.all().filter(camera=self.all_camera)
 
     # Note to self: Sort by date for events:
     # queryset = StoreEvent.objects.filter(stores__user=request.user).order_by('-date')
