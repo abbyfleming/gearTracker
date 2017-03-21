@@ -62,27 +62,27 @@ class ReturnGearView(TemplateView):
  
         # Update gear to packed
         for c in camera:
-            pack_camera = CameraModel.objects.filter(pk=c).update(safely_packed=True)
+            pack_camera = CameraModel.objects.filter(pk=c).update(safely_packed=False)
    
         for l in lens:
-            pack_lens = LensModel.objects.filter(pk=l).update(safely_packed=True)
+            pack_lens = LensModel.objects.filter(pk=l).update(safely_packed=False)
  
 
         # Check to see if all gear has been packed
         self.gear = PhotoshootHasGear.objects.get(event_id=self.event_id)
-        self.camera = self.gear.camera.all().filter(safely_packed=False)
-        self.lens = self.gear.lens.all().filter(safely_packed=False)
+        self.camera = self.gear.camera.all().filter(safely_packed=True)
+        self.lens = self.gear.lens.all().filter(safely_packed=True)
         self.message = []
         
         # LENS
         if (self.lens.count() == 0) and (self.camera.count() == 0):
-            # If all gear packed, set shoot to active
-            active_photoshoot = Photoshoot.objects.filter(id=id).update(active=True)
+            # If all gear packed, set shoot to not active
+            active_photoshoot = Photoshoot.objects.filter(id=id).update(active=False)
             return HttpResponseRedirect(redirect_to='/success')
 
         else:  
             # Display error message and list of items that returned False
-            self.message = "Oops! Keep Packing"  
+            self.message = "Missing!"  
 
             return render(
                 request, 'create_return_gear.html',{
