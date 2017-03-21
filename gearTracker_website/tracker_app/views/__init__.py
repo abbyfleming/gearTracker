@@ -19,3 +19,7 @@ from .photoshoot_view import PhotoShootView
 from .pack_gear_view import PackGearView
 from .success_view import SuccessView
 
+# Return Gear
+from .return_gear_view import ReturnGearView
+
+
