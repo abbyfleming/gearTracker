@@ -36,7 +36,7 @@ class PackGearView(TemplateView):
         # Get the Gear
         self.gear = PhotoshootHasGear.objects.get(event_id=self.event_id)
         self.camera = self.gear.camera.all().filter(customer_id=self.current_user)
-        self.lens = self.gear.lens.all()
+        self.lens = self.gear.lens.all().filter(customer_id=self.current_user)
 
         return render(
             request, 'create_pack_gear.html',{
@@ -59,6 +59,7 @@ class PackGearView(TemplateView):
         self.photoshoot = Photoshoot.objects.get(id=id)
         self.event_id = PhotoshootHasGear.objects.filter(id=id).values('event_id')
         self.event = Event.objects.get(id=self.event_id)
+        print("*****self.event*****", self.event)
  
         # Update gear to packed
         for c in camera:
@@ -75,12 +76,14 @@ class PackGearView(TemplateView):
         self.message = []
         
         # LENS
-        if self.lens.count() == 0:
+        if (self.lens.count() == 0) and (self.camera.count() == 0):
+            active_photoshoot = Photoshoot.objects.filter(id=id).update(active=True)
+            print("*****active_photoshoot*****", active_photoshoot)
             return HttpResponseRedirect(redirect_to='/success')
 
         else:  
             # Display error message and list of items that returned False
-            self.message = "Oops! You missed a lens"  
+            self.message = "Oops! Looks like you've missed something."  
 
             return render(
                 request, 'create_pack_gear.html',{

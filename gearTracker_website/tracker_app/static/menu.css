@@ -17,11 +17,13 @@
 .jumbotron {
 /*	background-image: url("img/header.jpg");*/
 	background: #999;
+  border-bottom: 25px solid #539A9A;
 }
 
 .jumbotron h1 {
 	color: white;
 }
+
 
 .padding-20 {
 	padding: 20px 0;
