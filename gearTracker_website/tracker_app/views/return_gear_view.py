@@ -13,13 +13,13 @@ from tracker_app.models import Event
 from tracker_app.models import Photoshoot
 
 
-class PackGearView(TemplateView):
+class ReturnGearView(TemplateView):
     """
     Purpose: Bring gear to a shoot!
     Methods: post, get
     """
 
-    template_name = 'create_pack_gear.html'
+    template_name = 'create_return_gear.html'
 
     
     def get(self, request, id):
@@ -39,7 +39,7 @@ class PackGearView(TemplateView):
         self.lens = self.gear.lens.all().filter(customer_id=self.current_user)
 
         return render(
-            request, 'create_pack_gear.html',{
+            request, 'create_return_gear.html',{
             'client_details': self.photoshoot,
             'event': self.event,
             'camera': self.camera,
@@ -85,7 +85,7 @@ class PackGearView(TemplateView):
             self.message = "Oops! Keep Packing"  
 
             return render(
-                request, 'create_pack_gear.html',{
+                request, 'create_return_gear.html',{
                 'message': self.message,
                 'event': self.event,
                 'client_details': self.photoshoot,

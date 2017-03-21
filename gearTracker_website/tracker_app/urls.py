@@ -26,8 +26,9 @@ urlpatterns = [
     url(r'^event-gear/', views.event_has_gear_view.EventHasGearView.as_view(), name='event_gear'),
     url(r'^photoshoot/', views.photoshoot_view.PhotoShootView.as_view(), name='photoshoot'),
 
-    # Pack Gear
+    # Pack & Return Gear
     url(r'^pack-gear/(?P<id>\d+)/$', views.pack_gear_view.PackGearView.as_view(), name='pack_gear'),
+    url(r'^return-gear/(?P<id>\d+)/$', views.return_gear_view.ReturnGearView.as_view(), name='return_gear'),
     url(r'^success/', views.success_view.SuccessView.as_view(), name='success'),
     
 ]
