@@ -62,16 +62,16 @@ class ReturnGearView(TemplateView):
  
         # Update gear to packed
         for c in camera:
-            pack_camera = CameraModel.objects.filter(pk=c).update(safely_packed=False)
+            pack_camera = CameraModel.objects.filter(pk=c).update(safely_packed=True)
    
         for l in lens:
-            pack_lens = LensModel.objects.filter(pk=l).update(safely_packed=False)
+            pack_lens = LensModel.objects.filter(pk=l).update(safely_packed=True)
  
 
         # Check to see if all gear has been packed
         self.gear = PhotoshootHasGear.objects.get(event_id=self.event_id)
-        self.camera = self.gear.camera.all().filter(safely_packed=True)
-        self.lens = self.gear.lens.all().filter(safely_packed=True)
+        self.camera = self.gear.camera.all().filter(safely_packed=False)
+        self.lens = self.gear.lens.all().filter(safely_packed=False)
         self.message = []
         
         # LENS

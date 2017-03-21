@@ -15,11 +15,10 @@ from .event_view import EventView
 from .event_has_gear_view import EventHasGearView
 from .photoshoot_view import PhotoShootView
 
-# Pack Gear
+# Pack & Return Gear
 from .pack_gear_view import PackGearView
 from .success_view import SuccessView
-
-# Return Gear
 from .return_gear_view import ReturnGearView
+from .list_gear_view import ListGearView
 
 

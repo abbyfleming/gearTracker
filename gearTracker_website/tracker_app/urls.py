@@ -30,5 +30,6 @@ urlpatterns = [
     url(r'^pack-gear/(?P<id>\d+)/$', views.pack_gear_view.PackGearView.as_view(), name='pack_gear'),
     url(r'^return-gear/(?P<id>\d+)/$', views.return_gear_view.ReturnGearView.as_view(), name='return_gear'),
     url(r'^success/', views.success_view.SuccessView.as_view(), name='success'),
+    url(r'^list-gear/', views.list_gear_view.ListGearView.as_view(), name='list_gear'),
     
 ]
