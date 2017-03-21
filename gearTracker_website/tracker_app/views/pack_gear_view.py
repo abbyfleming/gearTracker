@@ -61,35 +61,43 @@ class PackGearView(TemplateView):
         #update gear to packed
         for c in camera:
             pack_camera = CameraModel.objects.filter(pk=c).update(safely_packed=True)
-            print("*****pack_camera*****", pack_camera)
-            print("*****c*****", c)        
+            # print("*****pack_camera*****", pack_camera)
+            # print("*****c*****", c)        
 
         for l in lens:
             pack_lens = LensModel.objects.filter(pk=l).update(safely_packed=True)
-            print("*****pack_lens*****", pack_lens)
-            print("*****l*****", l)
+            # print("*****pack_lens*****", pack_lens)
+            # print("*****l*****", l)
 
 
         self.event_id = PhotoshootHasGear.objects.filter(id=id).values('event_id')
-        print("*****self.event_id*****", self.event_id)
-        # self.event = Event.objects.get(id=self.event_id)
+        # print("*****self.event_id*****", self.event_id)
+        self.event = Event.objects.get(id=self.event_id)
 
         self.gear = PhotoshootHasGear.objects.get(event_id=self.event_id)
         self.camera = self.gear.camera.all().filter(safely_packed=False)
         self.lens = self.gear.lens.all().filter(safely_packed=False)
-        print("*****self.gear*****", self.gear)
-        print("*****self.camera*****", self.camera)
-        print("*****self.lens*****", self.lens)
+        # print("*****self.gear*****", self.gear)
+        # print("*****self.camera*****", self.camera)
+        # print("*****self.lens*****", self.lens)
 
-        # if self.camera.count() == 0:
-        #     print("***you've packed all the cameras***")
-        # else: 
-        #     print("*****you missed a lens*****")     
+        #declare a variable
+        self.message = []
+        
+        # LENS
+        if self.lens.count() == 0:
+            self.message = "Wahoo! You've packed everything"
+            print("***self.message***", self.message)
 
-        if (self.lens.count() == 0) and (self.camera.count() == 0):
-            print("***you've packed everything")
-        else:
-            print("*****you missed*****")
+        else:  
+            self.message = "Oops! You missed a lens"  
+            print("*****self.message*****", self.message)
 
-        return HttpResponseRedirect(redirect_to='/')
+            return render(
+
+                request, 'create_pack_gear.html',{
+                'message': self.message,
+                'event': self.event,
+                }
+                )
 

@@ -4,13 +4,13 @@
 <div id="" class="col-md-8 col-md-offset-3">
 	<div class="input-group">
 
-<h2>Session Info</h2>
+<h2>Session</h2>
 	<p>Name: {{client_details.client_name}}</p>
 	<p>Date: {{client_details.date}}</p>
 	<p>Location: {{client_details.location}}</p>
 	<p>Event Type: {{event.name}}</p>
 
-<h2>Pack Gear</h2>
+<h2>Start Packing!</h2>
 
 	<form action="{% url 'tracker_app:pack_gear' event.id %}" method="post">
 		{% csrf_token %}
@@ -25,9 +25,10 @@
 		{% for l in lens %}
 			<input type="checkbox" name="lens" value="{{l.id}}"> {{l.lens_make}} {{l.min_focal_length}}-{{l.max_focal_length}} {{l.aperature}} <br/>
 		{% endfor %}
-		</div>
-
-		<input type="submit" value="OK">
+		</div> 
+	
+	<input type="submit" value="OK">
+	
 	</form>
 
 </div>
