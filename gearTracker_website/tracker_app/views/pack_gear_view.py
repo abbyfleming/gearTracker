@@ -24,7 +24,6 @@ class PackGearView(TemplateView):
     
     def get(self, request, id):
         # Fetch the event
-        print("*****id*****", id) #2
         self.current_user = request.user.pk 
 
         #Get only photoshoot that's been clicked
@@ -32,15 +31,11 @@ class PackGearView(TemplateView):
 
         # Get the event type
         self.event_id = PhotoshootHasGear.objects.filter(id=id).values('event_id')
-        print("*****self.event_id*****", self.event_id)
-        
         self.event = Event.objects.get(id=self.event_id)
-        print("*****self.event*****", self.event)
 
         # Get the Gear
         self.gear = PhotoshootHasGear.objects.get(event_id=self.event_id)
         self.camera = self.gear.camera.all().filter(customer_id=self.current_user)
-        print("*****self.camera*****", self.camera)
         self.lens = self.gear.lens.all()
 
         return render(
@@ -55,49 +50,44 @@ class PackGearView(TemplateView):
 
 
     def post(self, request, id):
+        # Get data from Form
         camera = request.POST.getlist('camera')
         lens = request.POST.getlist('lens')
-
-        #update gear to packed
+        
+        # Get photoshoot data
+        self.current_user = request.user.pk 
+        self.photoshoot = Photoshoot.objects.get(id=id)
+        self.event_id = PhotoshootHasGear.objects.filter(id=id).values('event_id')
+        self.event = Event.objects.get(id=self.event_id)
+ 
+        # Update gear to packed
         for c in camera:
             pack_camera = CameraModel.objects.filter(pk=c).update(safely_packed=True)
-            # print("*****pack_camera*****", pack_camera)
-            # print("*****c*****", c)        
-
+   
         for l in lens:
             pack_lens = LensModel.objects.filter(pk=l).update(safely_packed=True)
-            # print("*****pack_lens*****", pack_lens)
-            # print("*****l*****", l)
+ 
 
-
-        self.event_id = PhotoshootHasGear.objects.filter(id=id).values('event_id')
-        # print("*****self.event_id*****", self.event_id)
-        self.event = Event.objects.get(id=self.event_id)
-
+        # Check to see if all gear has been packed
         self.gear = PhotoshootHasGear.objects.get(event_id=self.event_id)
         self.camera = self.gear.camera.all().filter(safely_packed=False)
         self.lens = self.gear.lens.all().filter(safely_packed=False)
-        # print("*****self.gear*****", self.gear)
-        # print("*****self.camera*****", self.camera)
-        # print("*****self.lens*****", self.lens)
-
-        #declare a variable
         self.message = []
         
         # LENS
         if self.lens.count() == 0:
-            self.message = "Wahoo! You've packed everything"
-            print("***self.message***", self.message)
+            return HttpResponseRedirect(redirect_to='/success')
 
         else:  
+            # Display error message and list of items that returned False
             self.message = "Oops! You missed a lens"  
-            print("*****self.message*****", self.message)
 
             return render(
-
                 request, 'create_pack_gear.html',{
                 'message': self.message,
                 'event': self.event,
+                'client_details': self.photoshoot,
+                'camera': self.camera,
+                'lens': self.lens,
                 }
                 )
-

@@ -26,6 +26,11 @@
 			<input type="checkbox" name="lens" value="{{l.id}}"> {{l.lens_make}} {{l.min_focal_length}}-{{l.max_focal_length}} {{l.aperature}} <br/>
 		{% endfor %}
 		</div> 
+
+		{% if message %}
+			<h2>{{message}}</h2>
+		{% endif %}
+		
 	
 	<input type="submit" value="OK">
 	
