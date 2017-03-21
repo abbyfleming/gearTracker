@@ -17,4 +17,5 @@ from .photoshoot_view import PhotoShootView
 
 # Pack Gear
 from .pack_gear_view import PackGearView
+from .success_view import SuccessView
 

@@ -1,18 +1,6 @@
-	{% block content %}
+<div class="form-group">
+<label for="client_name">Client Name: </label>
+<input id="client_name" type="text" name="client_name" value="">
+</div>
 
-	<h1>Index Page</h1>
 
-	<h2>Events</h2>
-		{% for e in event %}
-			<h3>{{e.name}}</h3>
-		{% endfor %}
-
-	<h2>Cameras</h2>
-		{% for c in camera %}
-			<h3>{{c.name}}</h3>
-		{% endfor %}
-
-	<h2>Lenses</h2>
-		{% for l in lens %}
-			<h3>{{l.lens_make}} {{l.min_focal_length}} - {{l.max_focal_length}} {{l.aperature}}</h3>
-		{% endfor %}

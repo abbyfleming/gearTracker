@@ -5,7 +5,7 @@
 <h1>Login</h1>
 
 
-<form action="{# {% url 'tracker_app:login_customer' %} #}" method="post">
+<form action="{% url 'tracker_app:login_customer' %}" method="post">
 	{% csrf_token %}
     
     <label for="username">Username: </label>

@@ -9,13 +9,13 @@
 </head>
 <body>
 
-	<h1 align="center"> LOGO </h1>
+	<h1 align="center"><img src="{% static 'img/logo.png' %}" width="150px"></h1>
 
 	{% include 'nav.html' %}
 
 	{% block content %}
 
-	{% include 'home.html' %}
+		{% include 'home.html' %}
 
 	{% endblock%}
 

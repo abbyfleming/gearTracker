@@ -14,3 +14,16 @@
     float:none;
 }
 
+.jumbotron {
+/*	background-image: url("img/header.jpg");*/
+	background: #999;
+}
+
+.jumbotron h1 {
+	color: white;
+}
+
+.padding-20 {
+	padding: 20px 0;
+	margin: 20px 0;
+}
