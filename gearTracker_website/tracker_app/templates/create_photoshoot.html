@@ -2,29 +2,45 @@
 
 {% block content %}
 
+	
+<div id="" class="col-md-8 col-md-offset-3">
+	<div class="input-group">
 	<h1>PhotoShoot!</h1>
 
 	<form action="{% url 'tracker_app:photoshoot' %}" method="post">
 		{% csrf_token %}
 
-		<select id="event_id" name="event">	
-			{% for e in event %}
-				<option value="{{e.event_id}}">{{e}}</option>
-			{% endfor %}
-		</select>
+		<div class="form-group">
+			<label for="event">Event: </label>
+			<select id="event_id" name="event" class="form-control">	
+				{% for e in event %}
+					<option value="{{e.event_id}}" >{{e}}</option>
+				{% endfor %}
+			</select>
+		</div>
 
-		<label for="client_name">Client Name: </label>
-		<input id="client_name" type="text" name="client_name" value="">
+		<div class="form-group">
+			<label for="client_name">Client:</label>
+			<input id="client_name" type="text" class="form-control" name="client_name" value="">
+		</div>
 
-		<label for="location">Location: </label>
-		<input id="location" type="text" name="location" value="">
+		<div class="form-group">
+			<label for="location">Location: </label>
+			<input id="location" type="text" class="form-control" name="location" value="">
+		</div>
 
-		<label for="date">Date: </label>
-		<input id="date" type="date" name="date" value="">
+		<div class="form-group">
+			<label for="date">Date: </label>
+			<input id="date" type="date" class="form-control" name="date" value="">
+		</div>
 
-		<input type="submit" value="OK">
+		<div class="padding-20">
+			<input type="submit" value="OK">
+		</div>
+
 
 	</form>
+	</div>
+</div>
 
 {% endblock %}
-

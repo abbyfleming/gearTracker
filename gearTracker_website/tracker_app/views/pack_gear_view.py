@@ -77,10 +77,19 @@ class PackGearView(TemplateView):
         self.gear = PhotoshootHasGear.objects.get(event_id=self.event_id)
         self.camera = self.gear.camera.all().filter(safely_packed=False)
         self.lens = self.gear.lens.all().filter(safely_packed=False)
-
         print("*****self.gear*****", self.gear)
         print("*****self.camera*****", self.camera)
         print("*****self.lens*****", self.lens)
+
+        # if self.camera.count() == 0:
+        #     print("***you've packed all the cameras***")
+        # else: 
+        #     print("*****you missed a lens*****")     
+
+        if (self.lens.count() == 0) and (self.camera.count() == 0):
+            print("***you've packed everything")
+        else:
+            print("*****you missed*****")
 
         return HttpResponseRedirect(redirect_to='/')
 
