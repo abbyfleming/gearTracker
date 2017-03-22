@@ -28,6 +28,12 @@
 			<input type="submit" value="OK">
 		</div>
 
+		<h2>Cameras</h2>
+
+		{% for camera in customer_camera %}
+			{{camera.camera_make.name}} {{camera.name}}<br/>
+		{% endfor %}
+
 	</form>
 </div>
 </div>

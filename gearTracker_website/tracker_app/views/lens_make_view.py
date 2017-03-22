@@ -19,11 +19,11 @@ class LensMakeView(TemplateView):
     def get(self, request):
 
         self.all_lens_make = LensMake.objects.all()
-
+        
         return render(
-            request, 'create_lens_make.html',
-            {'lens_make': self.all_lens_make,}
-            )
+            request, 'create_lens_make.html', {
+            'lens_make': self.all_lens_make,
+            })
 
 
 

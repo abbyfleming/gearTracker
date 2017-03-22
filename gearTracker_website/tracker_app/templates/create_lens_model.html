@@ -39,7 +39,7 @@
 
 		<div class="form-group">
 		<label for="aperature">Aperature: </label>
-		<input id="aperature" type="number" step="0.2" min="1" name="aperature" value="" class="form-control">
+		<input id="aperature" type="number" step="0.1" min="1" name="aperature" value="" class="form-control">
 		</div>
 
 		<div class="padding-20">
@@ -47,6 +47,13 @@
 		</div>
 
 	</form>
+
+		<h2>Customer Lens</h2>
+		{% for l in customer_lens %}
+			{{l.lens_make}} {{l.min_focal_length}}-{{l.max_focal_length}} {{l.aperature}} <br/>
+		{% endfor %}
+
+
 
 </div>
 </div>

@@ -21,9 +21,9 @@ class CameraMakeView(TemplateView):
         self.all_camera_make = CameraMake.objects.all()
 
         return render(
-            request, 'create_camera_make.html',
-            {'camera_make': self.all_camera_make,}
-            )
+            request, 'create_camera_make.html', {
+            'camera_make': self.all_camera_make,
+            })
 
 
 

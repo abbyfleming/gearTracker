@@ -22,11 +22,13 @@ class CameraModelView(TemplateView):
 
         # Fetch the camera brands
         self.all_camera_makes = CameraMake.objects.all()
+        self.customer_camera = CameraModel.objects.filter(customer=request.user.pk)
 
         return render(
-            request, 'create_camera_model.html',
-            {'camera_make': self.all_camera_makes,}
-            )
+            request, 'create_camera_model.html', {
+            'camera_make': self.all_camera_makes,
+            'customer_camera': self.customer_camera,
+            })
 
 
     def post(self, request):
