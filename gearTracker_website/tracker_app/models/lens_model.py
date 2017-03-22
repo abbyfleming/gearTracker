@@ -15,14 +15,14 @@ class LensModel(models.Model):
 	
 	Methods: 
 	"""
-
 	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 	mount = models.ForeignKey(CameraMake, on_delete=models.CASCADE)
 	lens_make = models.ForeignKey(LensMake, on_delete=models.CASCADE)
 	min_focal_length = models.PositiveIntegerField()
 	max_focal_length = models.PositiveIntegerField()
 	aperature = models.DecimalField(decimal_places=1, max_digits=5)
-	safely_packed = models.BooleanField(default=False)
+	safely_packed = models.BooleanField(default=True)
+	missing = models.BooleanField(default=False)
 
 	
 	def __str__(self):

@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div id="" class="col-md-8 col-md-offset-3">
+
+	<h2>Lens</h2>
+		{% for l in lens %}
+			{{l.lens_make}} {{l.min_focal_length}}-{{l.max_focal_length}} {{l.aperature}}<br/>
+		{% endfor %}
+
+	<h2>Camera</h2>
+		{% for c in camera %}
+			{{c.name}}<br/>
+		{% endfor %}
+
+	<h2>Missing</h2>
+		{% for l in missing_lens %}
+			{{l.lens_make}} {{l.min_focal_length}}-{{l.max_focal_length}} {{l.aperature}}<br/>
+		{% endfor %}
+		
+		{% for c in missing_camera %}
+			{{c.name}}<br/>
+		{% endfor %}
+
+
+
+</div>
+
+{% endblock %}
+

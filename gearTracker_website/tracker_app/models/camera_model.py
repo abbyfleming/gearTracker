@@ -18,7 +18,8 @@ class CameraModel(models.Model):
 	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 	camera_make = models.ForeignKey(CameraMake, on_delete=models.CASCADE)
 	name = models.CharField(max_length=35)
-	safely_packed = models.BooleanField(default=False)
+	safely_packed = models.BooleanField(default=True)
+	missing = models.BooleanField(default=False)
 
 	def __str__(self):
 		return "{} {}".format(self.camera_make.name, self.name)
