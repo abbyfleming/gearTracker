@@ -76,13 +76,20 @@ class ReturnGearView(TemplateView):
         
         # LENS
         if (self.lens.count() == 0) and (self.camera.count() == 0):
-            # If all gear packed, set shoot to not active
+            # If all gear packed, set shoot to  inactive
             active_photoshoot = Photoshoot.objects.filter(id=id).update(active=False)
             return HttpResponseRedirect(redirect_to='/success')
 
+        
         else:  
             # Display error message and list of items that returned False
-            self.message = "Missing!"  
+            self.message = "Marked As Missing" 
+
+            for c in camera:
+                pack_camera = CameraModel.objects.filter(pk=c).update(missing=True)
+   
+            for l in lens:
+                pack_lens = LensModel.objects.filter(pk=l).update(missing=True)
 
             return render(
                 request, 'create_return_gear.html',{

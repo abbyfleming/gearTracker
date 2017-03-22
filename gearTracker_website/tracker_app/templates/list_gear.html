@@ -14,10 +14,13 @@
 		{% endfor %}
 
 	<h2>Missing</h2>
-		{% for lens in lens_make %}
-			{{lens.name}}<br/>
+		{% for l in missing_lens %}
+			{{l.lens_make}} {{l.min_focal_length}}-{{l.max_focal_length}} {{l.aperature}}<br/>
 		{% endfor %}
-
+		
+		{% for c in missing_camera %}
+			{{c.name}}<br/>
+		{% endfor %}
 
 
 

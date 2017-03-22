@@ -10,31 +10,45 @@
 	<p>Location: {{client_details.location}}</p>
 	<p>Event Type: {{event.name}}</p>
 
-<h2>Return Gear</h2>
 
-	<form action="{% url 'tracker_app:return_gear' event.id %}" method="post">
+	{% if message %}
+		<h2>Missing Gear</h2>
+
+		<div class="form-group">
+		{% for c in camera %}
+			{{c.camera_make.name}} {{c.name}}</br>
+		{% endfor %}
+
+		{% for l in lens %}
+			{{l.lens_make}} {{l.min_focal_length}}-{{l.max_focal_length}} {{l.aperature}} <br/>
+		{% endfor %}
+		</div> 		
+
+		<a href="{% url 'tracker_app:list_gear' %}">view all gear</a>
+
+	{% else %}
+		<h2>Return Gear</h2>
+
+		<form action="{% url 'tracker_app:return_gear' event.id %}" method="post">
 		{% csrf_token %}
 
 		<div class="form-group">
 		{% for c in camera %}
-			<input type="checkbox" name="camera" value="{{c.id}}" /> {{c.name}} </br>
+			<input type="checkbox" name="camera" value="{{c.id}}"> 
+			{{c.camera_make.name}} {{c.name}}</br>
 		{% endfor %}
-		</div>
-		
-		<div class="form-group">
-		{% for l in lens %}
-			<input type="checkbox" name="lens" value="{{l.id}}"> {{l.lens_make}} {{l.min_focal_length}}-{{l.max_focal_length}} {{l.aperature}} <br/>
-		{% endfor %}
-		</div> 
 
-		{% if message %}
-			<h2>{{message}}</h2>
-		{% endif %}
-		
-	
-	<input type="submit" value="OK">
-	
-	</form>
+		{% for l in lens %}
+			<input type="checkbox" name="lens" value="{{l.id}}"> 
+			{{l.lens_make}} {{l.min_focal_length}}-{{l.max_focal_length}} {{l.aperature}} <br/>
+		{% endfor %}
+		</div> 		
+
+		<input type="submit" value="OK">
+
+		</form>
+
+	{% endif %}
 
 </div>
 </div>

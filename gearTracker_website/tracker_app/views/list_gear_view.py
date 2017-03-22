@@ -21,13 +21,22 @@ class ListGearView(TemplateView):
     def get(self, request):
 
         # Fetch the camera brands
-        self.all_camera = CameraModel.objects.all().filter(customer=request.user.pk)
-        self.all_lens = LensModel.objects.all().filter(customer=request.user.pk)
+        self.all_camera = CameraModel.objects.all().filter(customer=request.user.pk).filter(missing=False)
+        self.all_lens = LensModel.objects.all().filter(customer=request.user.pk).filter(missing=False)
+
+        #missing
+        self.missing_camera = CameraModel.objects.all().filter(customer=request.user.pk).filter(missing=True)
+        self.missing_lens = LensModel.objects.all().filter(customer=request.user.pk).filter(missing=True)
+
+
+
 
         return render(
             request, 'list_gear.html',{
             'camera': self.all_camera,
             'lens': self.all_lens,
+            'missing_camera': self.missing_camera,
+            'missing_lens': self.missing_lens,
             })
 
     
