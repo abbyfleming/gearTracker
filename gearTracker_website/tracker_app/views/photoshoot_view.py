@@ -28,7 +28,6 @@ class PhotoShootView(TemplateView):
 
         #current user
         self.current_customer = request.user.pk
-        # Photoshoot should only show types of photoshoots that the user has created
 
         # get current camera
         self.camera = CameraModel.objects.filter(customer=self.current_customer)
