@@ -11,29 +11,29 @@
 </div>
 
 <div class="container">
-	<!-- Example row of columns -->
 	<div class="row">
+		
 		<div class="col-md-4">
 			<h2>Events</h2>
-			{% for e in event %}
-				<p>{{e}}</p>
+			{% for c in customer_photoshoot %}
+				<p>{{c.date}} - {{c.client_name}}</p>
 			{% endfor %}
-			<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
 		</div>
+		
 		<div class="col-md-4">
 			<h2>Camera</h2>
 			{% for c in camera %}
-				<p>{{c.name}}</p>
+				<p>{{c.camera_make.name}} {{c.name}}</p>
 			{% endfor %}
-			<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-	 </div>
+		 </div>
+		
 		<div class="col-md-4">
 			<h2>Lens</h2>
 			{% for l in lens %}
 				<p>{{l.lens_make}} {{l.min_focal_length}} - {{l.max_focal_length}} {{l.aperature}}</p>
 			{% endfor %}
-			<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
 		</div>
+	
 	</div>		 
 </div>
 		

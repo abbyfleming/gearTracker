@@ -4,7 +4,7 @@ from django.shortcuts import render
 from tracker_app.models import Event
 from tracker_app.models import CameraModel
 from tracker_app.models import LensModel
-from tracker_app.models import PhotoshootHasGear
+from tracker_app.models import Photoshoot
 
 class Index(TemplateView):
   '''
@@ -18,9 +18,7 @@ class Index(TemplateView):
 
     self.all_camera = CameraModel.objects.all().filter(customer=request.user.pk)
     self.all_lens = LensModel.objects.all().filter(customer=request.user.pk)
-
-    # Show only the events for the user. 
-    self.customer_event = PhotoshootHasGear.objects.all().filter(camera=self.all_camera)
+    self.customer_photoshoot = Photoshoot.objects.filter(customer=request.user.pk).order_by('date')
 
     # Note to self: Sort by date for events:
     # queryset = StoreEvent.objects.filter(stores__user=request.user).order_by('-date')
@@ -28,7 +26,7 @@ class Index(TemplateView):
 
     return render(
         request, 'index.html',{
-        'event': self.customer_event,
+        'customer_photoshoot': self.customer_photoshoot,
         'camera': self.all_camera,
         'lens': self.all_lens,
         }

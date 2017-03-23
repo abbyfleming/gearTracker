@@ -42,9 +42,7 @@ class PackGearView(TemplateView):
             'event': self.event,
             'camera': self.camera,
             'lens': self.lens,
-            }
-            )
-
+            })
 
 
     def post(self, request, id):

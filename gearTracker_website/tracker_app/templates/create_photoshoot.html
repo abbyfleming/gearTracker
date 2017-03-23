@@ -37,10 +37,18 @@
 		<div class="padding-20">
 			<input type="submit" value="OK">
 		</div>
-
-
 	</form>
 	</div>
+
+	<div>
+		{% for p in photoshoot %}
+			{{p.date}} - {{p.client_name}}<br/>
+			{{p.location}}<br/>
+			Start packing?<br/><br/><br/>
+		{% endfor %}
+	</div>
+
+
 </div>
 
 {% endblock %}

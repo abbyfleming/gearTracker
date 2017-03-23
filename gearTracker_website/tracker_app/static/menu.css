@@ -1,3 +1,7 @@
+html {
+  border: 15px solid #539A9A;
+}
+
 .navbar, .dropdown-menu{
   background: #fff;
   border: none;
@@ -17,7 +21,7 @@
 .jumbotron {
 /*	background-image: url("img/header.jpg");*/
 	background: #999;
-  border-bottom: 25px solid #539A9A;
+/*  border-bottom: 25px solid #539A9A;*/
 }
 
 .jumbotron h1 {
