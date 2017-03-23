@@ -25,7 +25,13 @@ class PhotoShootView(TemplateView):
 
         # Fetch the event // REFACTOR
         today = datetime.now()
-        self.event = PhotoshootHasGear.objects.all()
+
+        #current user
+        self.current_customer = request.user.pk
+
+        # get current camera
+        self.camera = CameraModel.objects.filter(customer=self.current_customer)
+        self.event = PhotoshootHasGear.objects.filter(camera=self.camera)        
         self.photoshoot = Photoshoot.objects.filter(customer=request.user.pk).filter(date__gte=today).order_by('date')
 
         return render(
@@ -34,21 +40,21 @@ class PhotoShootView(TemplateView):
             'photoshoot': self.photoshoot,
             })
 
+    
 
     def post(self, request):
         data = request.POST
-        print("*****data*****", data)
+        current_user = Customer.objects.get(user=request.user.pk)
 
         # Fetch the data from the Form
         client_name = data['client_name']
         location = data['location']
         date =  data['date']
-        event = data['event']
-        print("*****event*****", event)
+        gear = data['event']
+        print("*****gear*****", gear)
 
-        # Find the values of the FK
-        current_user = Customer.objects.get(user=request.user.pk)
-        current_gear = PhotoshootHasGear.objects.get(event=event)
+        # gear = models.ForeignKey(PhotoshootHasGear, on_delete=models.CASCADE)
+        current_gear = PhotoshootHasGear.objects.get(pk=gear)
         print("*****current_gear*****", current_gear)
 
         create_photoshoot = Photoshoot.objects.create(
@@ -60,7 +66,7 @@ class PhotoShootView(TemplateView):
             )
 
         # Redirect to same page
-        return HttpResponseRedirect("/photoshoot")
+        return HttpResponseRedirect("/")
 
 
     

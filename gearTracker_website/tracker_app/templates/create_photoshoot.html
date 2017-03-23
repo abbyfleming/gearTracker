@@ -12,12 +12,14 @@
 
 		<div class="form-group">
 			<label for="event">Event: </label>
+			
 			<select id="event_id" name="event" class="form-control">	
 				{% for e in event %}
-					<option value="{{e.event_id}}" >{{e}}</option>
+					<option value="{{e.pk}}" >{{e}}</option>
 				{% endfor %}
 			</select>
 		</div>
+
 
 		<div class="form-group">
 			<label for="client_name">Client:</label>
@@ -42,9 +44,10 @@
 
 	<div>
 		{% for p in photoshoot %}
-			{{p.date}} - {{p.client_name}}<br/>
+			<strong>{{p.gear.event.name}}</strong><br/>
+			{{p.date}} - {{p.client_name}} <br/>
 			{{p.location}}<br/>
-			Start packing?<br/><br/><br/>
+			<a href="{% url 'tracker_app:pack_gear' id=p.pk %}">Start Packing</a></br></br>
 		{% endfor %}
 	</div>
 
