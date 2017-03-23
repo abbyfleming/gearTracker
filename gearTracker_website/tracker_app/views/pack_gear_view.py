@@ -23,18 +23,17 @@ class PackGearView(TemplateView):
 
     
     def get(self, request, id):
-        self.current_user = request.user.pk 
 
-        # #Get only photoshoot that's been clicked
-        self.photoshoot = Photoshoot.objects.get(id=id)
-        self.gear_id = Photoshoot.objects.filter(id=id).values('gear_id')
-        self.event_id = PhotoshootHasGear.objects.filter(id=id).values('event_id')
-        self.event = Event.objects.get(id=self.gear_id)
+        # PHOTOSHOOT
+        self.photoshoot = Photoshoot.objects.get(pk=id)
+        self.gear_id= Photoshoot.objects.filter(pk=id).values('gear_id')
+        self.event_id = PhotoshootHasGear.objects.filter(pk=self.gear_id).values('event_id')
+        self.event = Event.objects.get(pk=self.event_id)
 
-        # # Get the Gear
-        self.gear = PhotoshootHasGear.objects.get(event_id=self.gear_id)
-        self.camera = self.gear.camera.all().filter(customer_id=self.current_user)
-        self.lens = self.gear.lens.all().filter(customer_id=self.current_user)
+        # GEAR
+        self.gear = PhotoshootHasGear.objects.get(pk=self.gear_id)
+        self.camera = self.gear.camera.filter(customer=request.user.pk)
+        self.lens = self.gear.lens.filter(customer=request.user.pk)
 
         return render(
             request, 'create_pack_gear.html',{

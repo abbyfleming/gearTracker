@@ -32,14 +32,8 @@ class PhotoShootView(TemplateView):
 
         # get current camera
         self.camera = CameraModel.objects.filter(customer=self.current_customer)
-        print("*****self.camera*****", self.camera)
-
-        self.event = PhotoshootHasGear.objects.filter(camera=self.camera)
-        print("*****self.event*****", self.event)
-        
+        self.event = PhotoshootHasGear.objects.filter(camera=self.camera)        
         self.photoshoot = Photoshoot.objects.filter(customer=request.user.pk).filter(date__gte=today).order_by('date')
-
-        print("*****self.photoshoot*****", self.photoshoot)
 
         return render(
             request, 'create_photoshoot.html',{
