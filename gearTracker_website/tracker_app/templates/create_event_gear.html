@@ -27,13 +27,15 @@
 		<div class="form-group">
 		<h3>Camera</h3>
 		{% for c in camera %}
-			<input type="checkbox" name="camera" value="{{c.id}}" /> {{c.name}}<br/>
+			<input type="checkbox" name="camera" value="{{c.id}}" />
+			{{c.camera_make.name}} {{c.name}}<br/>
 		{% endfor %}
 		</div>
-
 	    <input type="submit" value="OK">
-
 	</form>
+
+	<div>
+	</div>
 
 </div>
 </div>

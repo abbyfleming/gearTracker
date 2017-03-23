@@ -10,7 +10,6 @@ class Login(TemplateView):
     template_name = 'login.html'
 
 
-
 def login_customer(request):
     """
     Purpose: Login a customer using their username and password
@@ -30,6 +29,7 @@ def login_customer(request):
         return HttpResponseRedirect(redirect_to='/')
     # Successful, redirect to view the products
     return HttpResponseRedirect(redirect_to='/')
+
 
 def logout_view(request):
     logout(request)

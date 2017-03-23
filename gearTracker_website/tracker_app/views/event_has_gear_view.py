@@ -9,6 +9,7 @@ from tracker_app.models import Event
 from tracker_app.models import LensModel
 from tracker_app.models import CameraModel
 from tracker_app.models import PhotoshootHasGear
+from tracker_app.models import Photoshoot
 
 
 
@@ -27,12 +28,14 @@ class EventHasGearView(TemplateView):
         self.all_events = Event.objects.all()
         self.all_lens = LensModel.objects.all().filter(customer=request.user.pk)
         self.all_camera = CameraModel.objects.all().filter(customer=request.user.pk)
+        self.event_gear = PhotoshootHasGear.objects.all()
         
         return render(
             request, 'create_event_gear.html', {
             'event': self.all_events,
             'lens': self.all_lens,
             'camera': self.all_camera,
+            'event_gear': self.event_gear,
             })
 
 
