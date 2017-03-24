@@ -36,7 +36,7 @@ class EventView(TemplateView):
             )
 
         # Redirect to same page
-        return HttpResponseRedirect("/add-event")
+        return HttpResponseRedirect("/event-gear")
 
 
     

@@ -37,7 +37,7 @@ class LensMakeView(TemplateView):
             )
 
         # Redirect to same page
-        return HttpResponseRedirect("/add-lens-make")
+        return HttpResponseRedirect("/add-lens")
 
 
     
