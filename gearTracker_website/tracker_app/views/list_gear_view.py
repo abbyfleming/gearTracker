@@ -36,6 +36,42 @@ class ListGearView(TemplateView):
             'missing_lens': self.missing_lens,
             })
 
+
+
+    def post(self, request):
+        camera = request.POST.getlist('camera')
+        print("*****camera*****", camera)
+
+        lens = request.POST.getlist('lens')
+        print("*****lens*****", lens)
+
+        self.all_camera = CameraModel.objects.filter(customer=request.user.pk).filter(missing=False)
+        self.all_lens = LensModel.objects.filter(customer=request.user.pk).filter(missing=False)
+
+        #MISSING
+        self.missing_camera = CameraModel.objects.filter(customer=request.user.pk).filter(missing=True)
+        self.missing_lens = LensModel.objects.filter(customer=request.user.pk).filter(missing=True)
+
+        # Update gear to packed
+        for c in camera:
+            pack_camera = CameraModel.objects.filter(pk=c).update(missing=False)
+   
+        for l in lens:
+            pack_lens = LensModel.objects.filter(pk=l).update(missing=False)
+
+        return render(
+            request, 'list_gear.html',{
+            'camera': self.all_camera,
+            'lens': self.all_lens,
+            'missing_camera': self.missing_camera,
+            'missing_lens': self.missing_lens,
+            })
+
+
+
+
+
+
     
     
 

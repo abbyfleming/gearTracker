@@ -1,5 +1,6 @@
 from django.views.generic.base import TemplateView
 from django.shortcuts import render
+from django.utils.timezone import datetime
 
 from tracker_app.models import Event
 from tracker_app.models import CameraModel
@@ -15,14 +16,11 @@ class Index(TemplateView):
   template_name = "index.html"	
 
   def get(self, request):
+    today = datetime.now()
 
-    self.all_camera = CameraModel.objects.all().filter(customer=request.user.pk)
-    self.all_lens = LensModel.objects.all().filter(customer=request.user.pk)
-    self.customer_photoshoot = Photoshoot.objects.filter(customer=request.user.pk).order_by('date')
-
-    # Note to self: Sort by date for events:
-    # queryset = StoreEvent.objects.filter(stores__user=request.user).order_by('-date')
-    # http://stackoverflow.com/questions/761352/django-queryset-order
+    self.all_camera = CameraModel.objects.all().filter(customer=request.user.pk)[:3]
+    self.all_lens = LensModel.objects.all().filter(customer=request.user.pk)[:3]
+    self.customer_photoshoot = Photoshoot.objects.filter(customer=request.user.pk).filter(date__gte=today).order_by('date')[:3]
 
     return render(
         request, 'index.html',{
