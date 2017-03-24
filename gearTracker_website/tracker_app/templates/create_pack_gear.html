@@ -12,7 +12,7 @@
 
 <h2>Start Packing!</h2>
 
-	<form action="{% url 'tracker_app:pack_gear' event.id %}" method="post">
+	<form action="{% url 'tracker_app:pack_gear' client_details.id %}" method="post">
 		{% csrf_token %}
 
 		<div class="form-group">

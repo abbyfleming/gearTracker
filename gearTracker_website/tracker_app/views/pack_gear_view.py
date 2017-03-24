@@ -45,6 +45,8 @@ class PackGearView(TemplateView):
 
 
     def post(self, request, id):
+        print("*****id*****", id)
+
         # Get data from Form
         camera = request.POST.getlist('camera')
         lens = request.POST.getlist('lens')
