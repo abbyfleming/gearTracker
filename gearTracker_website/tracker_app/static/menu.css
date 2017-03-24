@@ -1,5 +1,5 @@
-html {
-/*  border: 15px solid #539A9A;*/
+body {
+  margin: 50px 0 100px 0;
 }
 
 .navbar, .dropdown-menu{
@@ -19,17 +19,21 @@ html {
 }
 
 .jumbotron {
-/*	background-image: url("img/header.jpg");*/
 	background: #999;
-/*  border-bottom: 25px solid #539A9A;*/
+  border-bottom: 25px solid #539A9A;
 }
 
 .jumbotron h1 {
 	color: white;
+  text-align: center;
 }
-
 
 .padding-20 {
 	padding: 20px 0;
 	margin: 20px 0;
 }
+
+.col-md-4 {
+  text-align: center;
+}
+

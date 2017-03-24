@@ -29,9 +29,11 @@ class PhotoShootView(TemplateView):
         #current user
         self.current_customer = request.user.pk
 
-        # get current camera
-        self.camera = CameraModel.objects.filter(customer=self.current_customer)
-        self.event = PhotoshootHasGear.objects.filter(camera=self.camera)        
+        # get current 
+        self.lens = LensModel.objects.filter(customer=request.user.pk)
+        self.event = PhotoshootHasGear.objects.filter(lens=self.lens)
+        # self.event = PhotoshootHasGear.objects.all()
+
         self.photoshoot = Photoshoot.objects.filter(customer=request.user.pk).filter(date__gte=today).filter(active=False).order_by('date')
 
         return render(
@@ -64,7 +66,7 @@ class PhotoShootView(TemplateView):
             )
 
         # Redirect to same page
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect("/photoshoot")
 
 
     

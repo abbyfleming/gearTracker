@@ -37,7 +37,7 @@ class CameraMakeView(TemplateView):
             )
 
         # Redirect to same page
-        return HttpResponseRedirect("/add-camera-make")
+        return HttpResponseRedirect("/add-camera")
 
 
     
