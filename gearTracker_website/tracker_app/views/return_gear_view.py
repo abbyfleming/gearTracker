@@ -23,6 +23,8 @@ class ReturnGearView(TemplateView):
 
     
     def get(self, request, id):
+        print("*****id*****", id)
+        
         # Fetch the event
         self.current_user = request.user.pk 
 
@@ -30,6 +32,7 @@ class ReturnGearView(TemplateView):
         self.gear_id= Photoshoot.objects.filter(pk=id).values('gear_id')
         self.event_id = PhotoshootHasGear.objects.filter(pk=self.gear_id).values('event_id')
         self.event = Event.objects.get(pk=self.event_id)
+        print("*****self.event*****", self.event)
 
         # GEAR
         self.gear = PhotoshootHasGear.objects.get(pk=self.gear_id)
@@ -48,16 +51,20 @@ class ReturnGearView(TemplateView):
 
 
     def post(self, request, id):
+        print("*****id*****", id)
+
         # Get data from Form
         camera = request.POST.getlist('camera')
         lens = request.POST.getlist('lens')
         
+
         # PHOTOSHOOT
         self.photoshoot = Photoshoot.objects.get(pk=id)
         self.gear_id= Photoshoot.objects.filter(pk=id).values('gear_id')
         self.event_id = PhotoshootHasGear.objects.filter(pk=self.gear_id).values('event_id')
         self.event = Event.objects.get(pk=self.event_id)
- 
+
+
         # Update gear to packed
         for c in camera:
             pack_camera = CameraModel.objects.filter(pk=c).update(safely_packed=True)
@@ -68,13 +75,8 @@ class ReturnGearView(TemplateView):
 
         # Check to see if all gear has been packed
         self.gear = PhotoshootHasGear.objects.get(pk=self.gear_id)
-        
         self.camera = self.gear.camera.filter(safely_packed=False)
-        print("*****self.camera*****", self.camera)
-
         self.lens = self.gear.lens.filter(safely_packed=False)
-        print("*****self.lens*****", self.lens)
-    
         self.message = []
         
         # LENS
@@ -97,9 +99,8 @@ class ReturnGearView(TemplateView):
             return render(
                 request, 'create_return_gear.html',{
                 'message': self.message,
-                'event': self.event,
                 'client_details': self.photoshoot,
+                'event': self.event,
                 'camera': self.camera,
                 'lens': self.lens,
-                }
-                )
+                })

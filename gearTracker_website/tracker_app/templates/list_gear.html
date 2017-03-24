@@ -13,14 +13,26 @@
 			{{c.name}}<br/>
 		{% endfor %}
 
+
 	<h2>Missing</h2>
+	{# <a class="btn btn-primary" href="{% url 'url-name'%}">Button-Text</a> #}
+		<form action="{% url 'tracker_app:list_gear' %}" method="post">
+		{% csrf_token %}
+		
 		{% for l in missing_lens %}
+			<input type="checkbox" name="lens" value="{{l.id}}"> 
 			{{l.lens_make}} {{l.min_focal_length}}-{{l.max_focal_length}} {{l.aperature}}<br/>
 		{% endfor %}
 		
 		{% for c in missing_camera %}
+			<input type="checkbox" name="camera" value="{{c.id}}"> 
 			{{c.name}}<br/>
 		{% endfor %}
+
+		<input type="submit" value="FOUND!">
+
+		</form>
+
 
 
 

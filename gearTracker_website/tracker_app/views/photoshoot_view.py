@@ -32,7 +32,7 @@ class PhotoShootView(TemplateView):
         # get current camera
         self.camera = CameraModel.objects.filter(customer=self.current_customer)
         self.event = PhotoshootHasGear.objects.filter(camera=self.camera)        
-        self.photoshoot = Photoshoot.objects.filter(customer=request.user.pk).filter(date__gte=today).order_by('date')
+        self.photoshoot = Photoshoot.objects.filter(customer=request.user.pk).filter(date__gte=today).filter(active=False).order_by('date')
 
         return render(
             request, 'create_photoshoot.html',{
@@ -51,11 +51,9 @@ class PhotoShootView(TemplateView):
         location = data['location']
         date =  data['date']
         gear = data['event']
-        print("*****gear*****", gear)
 
-        # gear = models.ForeignKey(PhotoshootHasGear, on_delete=models.CASCADE)
+        # FK
         current_gear = PhotoshootHasGear.objects.get(pk=gear)
-        print("*****current_gear*****", current_gear)
 
         create_photoshoot = Photoshoot.objects.create(
             customer = current_user,
