@@ -26,11 +26,7 @@ class ListGearView(TemplateView):
 
         #MISSING
         self.missing_camera = CameraModel.objects.filter(customer=request.user.pk).filter(missing=True)
-        print("*****self.missing_camera*****", self.missing_camera)
-
         self.missing_lens = LensModel.objects.filter(customer=request.user.pk).filter(missing=True)
-        print("*****self.missing_lens*****", self.missing_lens)
-
 
         return render(
             request, 'list_gear.html',{
@@ -44,10 +40,7 @@ class ListGearView(TemplateView):
 
     def post(self, request):
         camera = request.POST.getlist('camera')
-        print("*****camera*****", camera)
-
         lens = request.POST.getlist('lens')
-        print("*****lens*****", lens)
 
         # REFACTOR
         self.all_camera = CameraModel.objects.filter(customer=request.user.pk).filter(missing=False)
