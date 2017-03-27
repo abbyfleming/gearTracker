@@ -14,8 +14,8 @@ gearTracker allows users to:
 
 ## Technologies
 gearTracker is built using Python & Django and uses Django Templates
-`Python 3.6.0`
-`Django 1.10.5`
+* `Python 3.6.0`
+* `Django 1.10.5`
 
 
 ## Get Started
