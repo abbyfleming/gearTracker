@@ -19,10 +19,10 @@ gearTracker is built using Python & Django and uses Django Templates
 
 
 ## Get Started
-Clone down this repo and `cd gearTracker_website`
-`python manage.py makemigrations tracker_app`
-`python manage.py migrate`
-`python manage.py runserver`
+* Clone down this repo and `cd gearTracker_website`
+* `python manage.py makemigrations tracker_app`
+* `python manage.py migrate`
+* `python manage.py runserver`
 
 Check to see where the server is running. (Example: Development server is running at http://127.0.0.1:8000/)
 
