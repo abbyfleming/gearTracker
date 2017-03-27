@@ -21,13 +21,12 @@ class ListGearView(TemplateView):
     def get(self, request):
 
         #CAMERA / LENS // REFACTOR
-        self.all_camera = CameraModel.objects.filter(customer=request.user.pk).filter(missing=True)
-        self.all_lens = LensModel.objects.filter(customer=request.user.pk).filter(missing=True)
+        self.all_camera = CameraModel.objects.filter(customer=request.user.pk).filter(missing=False)
+        self.all_lens = LensModel.objects.filter(customer=request.user.pk).filter(missing=False)
 
         #MISSING
-        self.missing_camera = CameraModel.objects.filter(customer=request.user.pk).filter(missing=False)        
-        self.missing_lens = LensModel.objects.filter(customer=request.user.pk).filter(missing=False)
-
+        self.missing_camera = CameraModel.objects.filter(customer=request.user.pk).filter(missing=True)
+        self.missing_lens = LensModel.objects.filter(customer=request.user.pk).filter(missing=True)
 
         return render(
             request, 'list_gear.html',{
@@ -41,25 +40,22 @@ class ListGearView(TemplateView):
 
     def post(self, request):
         camera = request.POST.getlist('camera')
-        print("*****camera*****", camera)
-
         lens = request.POST.getlist('lens')
-        print("*****lens*****", lens)
 
         # REFACTOR
-        self.all_camera = CameraModel.objects.filter(customer=request.user.pk).filter(missing=True)
-        self.all_lens = LensModel.objects.filter(customer=request.user.pk).filter(missing=True)
+        self.all_camera = CameraModel.objects.filter(customer=request.user.pk).filter(missing=False)
+        self.all_lens = LensModel.objects.filter(customer=request.user.pk).filter(missing=False)
 
         #MISSING
-        self.missing_camera = CameraModel.objects.filter(customer=request.user.pk).filter(missing=False)
-        self.missing_lens = LensModel.objects.filter(customer=request.user.pk).filter(missing=False)
+        self.missing_camera = CameraModel.objects.filter(customer=request.user.pk).filter(missing=True)
+        self.missing_lens = LensModel.objects.filter(customer=request.user.pk).filter(missing=True)
 
-        # Update gear to packed
+        # Update gear to found
         for c in camera:
-            pack_camera = CameraModel.objects.filter(pk=c).update(missing=True)
+            pack_camera = CameraModel.objects.filter(pk=c).update(missing=False)
    
         for l in lens:
-            pack_lens = LensModel.objects.filter(pk=l).update(missing=True)
+            pack_lens = LensModel.objects.filter(pk=l).update(missing=False)
 
         return render(
             request, 'list_gear.html',{

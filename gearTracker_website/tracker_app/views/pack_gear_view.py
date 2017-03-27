@@ -45,7 +45,6 @@ class PackGearView(TemplateView):
 
 
     def post(self, request, id):
-        print("*****id*****", id)
 
         # Get data from Form
         camera = request.POST.getlist('camera')
@@ -66,10 +65,10 @@ class PackGearView(TemplateView):
         # Update gear to packed
         for c in camera:
             pack_camera = CameraModel.objects.filter(pk=c).update(safely_packed=False)
+
    
         for l in lens:
             pack_lens = LensModel.objects.filter(pk=l).update(safely_packed=False)
- 
 
         self.message = []
         

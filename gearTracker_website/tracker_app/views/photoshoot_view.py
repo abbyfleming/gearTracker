@@ -34,7 +34,7 @@ class PhotoShootView(TemplateView):
         self.event = PhotoshootHasGear.objects.filter(lens=self.lens)
         # self.event = PhotoshootHasGear.objects.all()
 
-        self.photoshoot = Photoshoot.objects.filter(customer=request.user.pk).filter(date__gte=today).filter(active=False).order_by('date')
+        self.photoshoot = Photoshoot.objects.filter(customer=request.user.pk).filter(date__gte=today).order_by('date')
 
         return render(
             request, 'create_photoshoot.html',{
