@@ -48,7 +48,8 @@
 			<strong>{{p.gear.event.name}}</strong><br/>
 			{{p.date}} - {{p.client_name}} <br/>
 			{{p.location}}<br/>
-			<a href="{% url 'tracker_app:pack_gear' id=p.pk %}">Start Packing</a></br></br>
+			<a href="{% url 'tracker_app:pack_gear' id=p.pk %}">Start Packing</a> | 
+			<a href="{% url 'tracker_app:return_gear' id=p.pk %}">Return Gear</a></br></br>
 		{% endfor %}
 	</div>
 
