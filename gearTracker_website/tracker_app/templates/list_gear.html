@@ -18,16 +18,19 @@
 	{# <a class="btn btn-primary" href="{% url 'url-name'%}">Button-Text</a> #}
 		<form action="{% url 'tracker_app:list_gear' %}" method="post">
 		{% csrf_token %}
+
+		{% for cam in missing_camera %}
+			<input type="checkbox" name="camera" value="{{cam.id}}"> 
+			{{cam.name}} - missing<br/>
+		{% endfor %}
 		
 		{% for lens in missing_lens %}
 			<input type="checkbox" name="lens" value="{{lens.id}}"> 
-			{{lens.lens_make}} {{lens.min_focal_length}}-{{lens.max_focal_length}} {{lens.aperature}}<br/>
+			{{lens.lens_make}} {{lens.min_focal_length}}-{{lens.max_focal_length}} {{lens.aperature}}
+			- missing <br/>
 		{% endfor %}
 		
-		{% for cam in missing_camera %}
-			<input type="checkbox" name="camera" value="{{cam.id}}"> 
-			{{cam.name}}<br/>
-		{% endfor %}
+
 
 		<input type="submit" value="FOUND!">
 
