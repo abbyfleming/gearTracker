@@ -10,13 +10,13 @@ import datetime
 # python manage.py test tracker_app
 
 class TestCameraMake(TestCase):
-	"""
-	Purpose: Test Customer
-	Author: Abby
+	'''
+	Purpose: TestCameraMake
+
 	Tests: 
-		test_customer_is_instance
-		test_customer_has_name
-	"""
+		test_nikon_is_instance_of_camera_brand
+		test_camera_has_brand_has_name
+	'''
 
 	@classmethod
 	def setUpTestData(self):

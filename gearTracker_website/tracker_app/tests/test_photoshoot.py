@@ -10,19 +10,18 @@ from tracker_app.models.lens_model import LensModel
 from tracker_app.models.camera_make import CameraMake
 from tracker_app.models.camera_model import CameraModel
 from tracker_app.models.event import Event
-from tracker_app.models.photoshoot_has_gear import PhotoshootHasGear
+from tracker_app.models.event_has_gear import PhotoshootHasGear
 from tracker_app.models.photoshoot import Photoshoot
 
 
 # python manage.py test tracker_app
 
-class TestLensModel(TestCase):
-	"""
-	Purpose: Test Customer
-	Author: Abby
+class TestPhotoshoot(TestCase):
+	'''
+	Purpose: TestPhotoshoot
 	Tests: 
 
-	"""
+	'''
 
 	@classmethod
 	def setUpTestData(self):
@@ -60,7 +59,6 @@ class TestLensModel(TestCase):
 			min_focal_length = 70,
 			max_focal_length = 200,
 			aperature = 2.8,
-			purchase_date = "2011-07-01"
 			)
 		self.zoom.save()
 
@@ -69,7 +67,6 @@ class TestLensModel(TestCase):
 			customer = self.suzy,
 			camera_make = self.nikon,
 			name = "D700",
-			purchase_date =  "2010-06-01",
 			)
 		self.d700.save()
 
@@ -93,8 +90,6 @@ class TestLensModel(TestCase):
 			active = "True"
 			)
 		self.photoshoot.save()
-
-
 
 
 
