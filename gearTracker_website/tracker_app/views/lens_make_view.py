@@ -8,11 +8,17 @@ from tracker_app.models import LensMake
 
 
 class LensMakeView(TemplateView):
-    """
-    Purpose: LENS MAKE: Tamron, Petzel...
-    Methods: post, get
-    Author: @abbyfleming
-    """
+    ''' 
+    Purpose:
+        Allow a user to create a lens make (ie: Sigma)
+
+    get: 
+        Returns all lens make
+    
+    post: 
+        Create a lens make
+    
+    '''
 
     template_name = 'create_lens_make.html'
 

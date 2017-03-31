@@ -14,11 +14,18 @@ from tracker_app.models import Photoshoot
 
 
 class ReturnGearView(TemplateView):
-    """
-    Purpose: Given a user wants to to return their gear, check to make sure that all gear has been packed.
-    If the gear has been packed, proceed to "success", otherwise flag missing gear as "missing"
-    Methods: post, get
-    """
+    ''' 
+    Purpose:
+        Allow a user to return their gear for an event. Flag gear as "missing" if an item isn't returned
+
+    get:
+        Returns client details, event, camera, lens
+    
+    post:
+        Selected items will be updated to safely_packed
+        If missing, update to missing
+        Return message if missing
+    '''
 
     template_name = 'create_return_gear.html'
 

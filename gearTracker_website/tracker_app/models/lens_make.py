@@ -2,15 +2,16 @@ from django.db import models
 
 
 class LensMake(models.Model):
-	"""
-	Author: @abbyfleming
-	
-	Purpose: The Lens model will allow users to select from pre-defined camera choices. Example: Nikon
+	'''
+	Purpose: 
+		The LensMake model defines the structure of an lens make. (ie: Sigma). 
 
-	Properties: lens_brand_name
-	
-	Methods: __str__ Returns a lens brand name
-	"""
+	Properties: 
+		name - CharField
+		
+	Methods:
+		__str__ Returns name (ie: Sigma)
+	'''
 
 	name = models.CharField(max_length=70)
 	

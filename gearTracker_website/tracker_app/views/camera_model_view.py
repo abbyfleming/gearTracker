@@ -10,11 +10,16 @@ from tracker_app.models import Customer
 
 
 class CameraModelView(TemplateView):
-    """
-    Purpose: CAMERA MODEL: D750, D700... 
-    Methods: post, get
-    Author: @abbyfleming
-    """
+    ''' 
+    Purpose:
+        Allow a user to create a camera model. (ie: Nikon D700)
+
+    get: 
+        Returns camera_make and the customer's cameras
+    
+    post: 
+        Create a camera model     
+    '''
 
     template_name = 'create_camera_model.html'
 

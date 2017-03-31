@@ -8,11 +8,17 @@ from tracker_app.models import Event
 
 
 class EventView(TemplateView):
-    """
-    Purpose: EVENT: Create an event ie: Wedding, Proposal
-    Methods: post, get
-    Author: @abbyfleming
-    """
+    ''' 
+    Purpose:
+        Allow a user to create an event (ie: Wedding)
+
+    get: 
+        Returns all events
+    
+    post: 
+        Create an event
+    
+    '''
 
     template_name = 'create_event.html'
 

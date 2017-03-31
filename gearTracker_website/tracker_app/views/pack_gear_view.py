@@ -14,10 +14,17 @@ from tracker_app.models import Photoshoot
 
 
 class PackGearView(TemplateView):
-    """
-    Purpose: Bring gear to a shoot!
-    Methods: post, get
-    """
+    ''' 
+    Purpose:
+        Allow a user to pack their gear for an event. Notify user is gear has not been packed.
+
+    get:
+        Returns client details, event, camera, lens
+    
+    post:
+        Update camera, lens to not safely packed (false)
+        and add a message (if a gear item has not been packed)
+    '''
 
     template_name = 'create_pack_gear.html'
 

@@ -10,11 +10,17 @@ from tracker_app.models import Customer
 
 
 class ListGearView(TemplateView):
-    """
-    Purpose: CAMERA MODEL: D750, D700... 
-    Methods: post, get
-    Author: @abbyfleming
-    """
+    ''' 
+    Purpose:
+        Allow a user to see all of their gear including missing
+
+    get: 
+        Returns camera, lens, missing camera, and missing lens
+    
+    post: 
+        Updates gear from missing to found
+    
+    '''
 
     template_name = 'list_gear.html'
 
