@@ -5,13 +5,21 @@ from .event_has_gear import PhotoshootHasGear
 
 
 class Photoshoot(models.Model):
-	"""
-	Purpose: The Camera model will hold information to allow a customer to input their camera information.
-
+	'''
+	Purpose: 
+		The Photoshoot model defines the structure of a photoshoot
+	
 	Properties: 
-					
-	Methods: __str__ Returns a customer's first and last name  
-	"""
+		customer - ForeignKey to Customer
+		gear - ForeignKey to PhotoshootHasGear
+		client_name - CharField
+		location - CharField
+		date - DateField
+		active - BooleanField
+		
+	Methods:
+		__str__ Returns client_name, gear.id (ie: Kasey 1)
+	'''
 
 	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 	gear = models.ForeignKey(PhotoshootHasGear, on_delete=models.CASCADE)

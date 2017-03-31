@@ -2,15 +2,16 @@ from django.db import models
 
 
 class CameraMake(models.Model):
-	"""
-	Author: @abbyfleming
+	'''	
+	Purpose: 
+		The CameraModel model defines the structure of a camera make. 
 	
-	Purpose: The Camera Brand model will allow users to select from pre-defined camera choices. Example: Nikon
-
-	Properties: camera_brand_name
+	Properties: 
+		name- CharField
 	
-	Methods: __str__ Returns a camera brand name
-	"""
+	Methods: 
+		__str__ returns a camera brand name (ie: Nikon)
+	'''
 
 	name = models.CharField(max_length=70)
 	

@@ -2,13 +2,16 @@ from django.db import models
 
 
 class Event(models.Model):
-	"""
-	Purpose: The Event model will allow users to create an Event Type(Category). ie: wedding, proposal, engagement
+	'''
+	Purpose: 
+		The Event model defines the structure of an event. (ie: Wedding)
 
-	Properties: name
+	Properties: 
+		name - CharField
 	
-	Methods: __str__ Returns an event name
-	"""
+	Methods:
+		__str__ Returns name (ie: Wedding)
+	'''
 
 	name = models.CharField(max_length=70)
 	

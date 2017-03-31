@@ -4,16 +4,20 @@ from .camera_make import CameraMake
 
 
 class CameraModel(models.Model):
-	"""
-	Author: @abbyfleming
+	'''	
+	Purpose: 
+		The CameraModel model defines the structure of a camera model. 
 	
-	Purpose: The Camera model will hold information to allow a customer to input their camera information.
-
-	Properties: customer - FK to customer
-				camera_model - FK to camera model
-				camera_make - string		
+	Properties: 
+		customer - ForeignKey to Customer
+		camera_make - ForeignKey to CameraMake
+		name - CharField
+		safely_packed - Boolean
+		missing - Boolean
+	
 	Methods: 
-	"""
+		__str__ returns camera_make.name, name (ie: Nikon D700)
+	'''
 
 	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 	camera_make = models.ForeignKey(CameraMake, on_delete=models.CASCADE)
