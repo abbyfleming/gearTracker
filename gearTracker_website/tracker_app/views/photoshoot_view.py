@@ -14,10 +14,16 @@ from tracker_app.models import Photoshoot
 
 
 class PhotoShootView(TemplateView):
-    """
-    Purpose: Bring gear to a shoot!
-    Methods: post, get
-    """
+    ''' 
+    Purpose:
+        Allow a user to create a photoshoot with details
+
+    get:
+        Returns events (greater than today), photoshoot
+    
+    post:
+        Create photoshoot details, event, and date
+    '''
 
     template_name = 'create_photoshoot.html'
 

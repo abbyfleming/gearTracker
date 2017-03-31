@@ -11,10 +11,17 @@ from tracker_app.models import Customer
 
 
 class LensModelView(TemplateView):
-    """
-    Purpose: LENS MODEL: Nikon Nikkor 70-200 2.8
-    Methods: post, get
-    """
+    ''' 
+    Purpose:
+        Allow a user to create a lens model (ie: Nikon Nikkor 24-70 2.8)
+
+    get: 
+        Returns camera make, lens make, and lens
+    
+    post: 
+        Create a lens
+    
+    '''
 
     template_name = 'create_lens_model.html'
 

@@ -11,19 +11,19 @@ from tracker_app.views import login_view
 
 
 class Register(TemplateView):
+    ''' 
+    Purpose:
+        Allow a user to register using create_user
+
+    register_customer - once registered, immediate login
+
+    '''
+
     template_name = 'register.html'
 
 
 
 def register_customer(request):
-    """
-    Purpose: Register a customer and immediently login
-    Author: @abbyfleming
-    """
-    # create_user is what holds the username/password. (Django magic)
-    # then, we pass that into the 1:1 field on our model, Customer
-    # send all of the information to login_customer on login_view.py
-
     data = request.POST
 
     new_user = User.objects.create_user(

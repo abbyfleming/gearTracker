@@ -6,6 +6,14 @@ from django.http import HttpResponseRedirect
 
 
 class Login(TemplateView):
+    ''' 
+    Purpose:
+        Allow a user to login
+
+    login_customer
+    logout_view 
+
+    '''
     
     template_name = 'login.html'
 

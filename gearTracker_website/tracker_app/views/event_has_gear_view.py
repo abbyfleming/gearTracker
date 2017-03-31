@@ -15,11 +15,17 @@ from tracker_app.models import Photoshoot
 
 
 class EventHasGearView(TemplateView):
-    """
-    Purpose: EVENT: Create an event ie: Wedding, Proposal
-    Methods: post, get
-    Author: @abbyfleming
-    """
+    ''' 
+    Purpose:
+        Allow a user to associate gear with an event. 
+
+    get: 
+        Returns event, lens, camera, event_gear
+    
+    post: 
+        Add gear to an event
+    
+    '''
 
     template_name = 'create_event_gear.html'
 
