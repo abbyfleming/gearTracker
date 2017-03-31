@@ -12,16 +12,16 @@ from tracker_app.models.lens_model import LensModel
 # python manage.py test tracker_app
 
 class TestLensModel(TestCase):
-	"""
-	Purpose: Test Customer
-	Author: Abby
+	'''
+	Purpose: Test TestLensModel
 	Tests: 
-		test_d700_is_instance_of_camera
-		test_camera_has_customer
-		test_camera_has_brand
-		test_camera_has_model
-		test_camera_has_purchase_date
-	"""
+		test_zoom_is_instance_of_lens
+		test_lens_has_customer
+		test_lens_has_brand
+		test_lens_has_min_focal_length
+		test_lens_has_max_focal_length
+		test_lens_has_aperature
+	'''
 
 	@classmethod
 	def setUpTestData(self):
@@ -50,7 +50,6 @@ class TestLensModel(TestCase):
 			min_focal_length = 70,
 			max_focal_length = 200,
 			aperature = 2.8,
-			purchase_date = "2011-07-01"
 			)
 
 
@@ -72,8 +71,6 @@ class TestLensModel(TestCase):
 	def test_lens_has_aperature(self):
 		self.assertEqual(2.8, self.zoom.aperature)
 
-	def test_lens_has_purchase_date(self):
-		self.assertEqual("2011-07-01", self.zoom.purchase_date)
 	
 
 	

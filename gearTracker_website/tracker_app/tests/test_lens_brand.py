@@ -9,13 +9,12 @@ from tracker_app.models.lens_make import LensMake
 
 
 class TestLensMake(TestCase):
-	"""
-	Purpose: Test Brand
-	Author: Abby
+	'''
+	Purpose: TestLensMake
 	Tests:
 		test_nikkor_is_instance_of_lens_brand
 		test_lens_brand_has_name
-	"""
+	'''
 
 	@classmethod
 	def setUpTestData(self):

@@ -10,14 +10,13 @@ import datetime
 # python manage.py test tracker_app
 
 class TestCustomer(TestCase):
-	"""
-	Purpose: Test Customer
-	Author: Abby
+	'''
+	Purpose: TestCustomer
 	Tests: 
-		test_customer_is_instance
+		test_suzy_is_instance_of_customer
 		test_customer_has_full_name
 		test_customer_has_email
-	"""
+	'''
 
 	@classmethod
 	def setUpTestData(self):

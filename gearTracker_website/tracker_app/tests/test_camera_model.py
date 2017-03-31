@@ -13,16 +13,14 @@ import datetime
 # python manage.py test tracker_app
 
 class TestCameraModel(TestCase):
-	"""
-	Purpose: Test Customer
-	Author: Abby
+	'''
+	Purpose: TestCameraModel
 	Tests: 
 		test_d700_is_instance_of_camera
 		test_camera_has_customer
 		test_camera_has_brand
 		test_camera_has_model
-		test_camera_has_purchase_date
-	"""
+	'''
 
 	@classmethod
 	def setUpTestData(self):
@@ -49,7 +47,6 @@ class TestCameraModel(TestCase):
 			customer = self.suzy,
 			camera_make = self.nikon,
 			name = "D700",
-			purchase_date =  "2010-06-01",
 			)
 
 
@@ -65,8 +62,6 @@ class TestCameraModel(TestCase):
 	def test_camera_has_model(self):
 		self.assertEqual("D700", self.d700.name)
 
-	def test_camera_has_purchase_date(self):
-		self.assertEqual("2010-06-01", self.d700.purchase_date)
 	
 
 	

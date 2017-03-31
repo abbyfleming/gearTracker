@@ -10,12 +10,12 @@ import datetime
 # python manage.py test tracker_app
 
 class TestEvent(TestCase):
-	"""
-	Purpose: Test Events
-	Author: Abby
+	'''
+	Purpose: TestEvent
 	Tests: 
-		
-	"""
+		test_wedding_is_instance_of_event
+		test_event_has_name
+	'''
 
 	@classmethod
 	def setUpTestData(self):
