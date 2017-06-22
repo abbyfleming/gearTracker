@@ -28,16 +28,15 @@ class LensModelView(TemplateView):
     def get(self, request):
 
         # Fetch the camera brands
-        self.all_lens_makes = LensMake.objects.all()
-        self.all_camera_makes = CameraMake.objects.all()
-        self.customer_lens = LensModel.objects.filter(customer=request.user.pk)
+        all_lens_makes = LensMake.objects.all()
+        all_camera_makes = CameraMake.objects.all()
+        customer_lens = LensModel.objects.filter(customer=request.user.pk)
 
         
-        return render(
-            request, 'create_lens_model.html', {
-            'lens_make': self.all_lens_makes,
-            'camera_make': self.all_camera_makes,
-            'customer_lens': self.customer_lens, 
+        return render(request, self.template_name, {
+            'lens_make': all_lens_makes,
+            'camera_make': all_camera_makes,
+            'customer_lens': customer_lens, 
             })
 
 

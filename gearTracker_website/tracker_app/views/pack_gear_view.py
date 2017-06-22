@@ -28,26 +28,24 @@ class PackGearView(TemplateView):
 
     template_name = 'create_pack_gear.html'
 
-    
     def get(self, request, id):
 
         # PHOTOSHOOT
-        self.photoshoot = Photoshoot.objects.get(pk=id)
-        self.gear_id= Photoshoot.objects.filter(pk=id).values('gear_id')
-        self.event_id = PhotoshootHasGear.objects.filter(pk=self.gear_id).values('event_id')
-        self.event = Event.objects.get(pk=self.event_id)
+        photoshoot = Photoshoot.objects.get(pk=id)
+        gear_id= Photoshoot.objects.filter(pk=id).values('gear_id')
+        event_id = PhotoshootHasGear.objects.filter(pk=gear_id).values('event_id')
+        event = Event.objects.get(pk=event_id)
 
         # GEAR
-        self.gear = PhotoshootHasGear.objects.get(pk=self.gear_id)
-        self.camera = self.gear.camera.filter(customer=request.user.pk)
-        self.lens = self.gear.lens.filter(customer=request.user.pk)
+        gear = PhotoshootHasGear.objects.get(pk=gear_id)
+        camera = gear.camera.filter(customer=request.user.pk)
+        lens = gear.lens.filter(customer=request.user.pk)
 
-        return render(
-            request, 'create_pack_gear.html',{
-            'client_details': self.photoshoot,
-            'event': self.event,
-            'camera': self.camera,
-            'lens': self.lens,
+        return render(request, self.template_name, {
+            'client_details': photoshoot,
+            'event': event,
+            'camera': camera,
+            'lens': lens,
             })
 
 
@@ -56,45 +54,44 @@ class PackGearView(TemplateView):
         # Get data from Form
         camera = request.POST.getlist('camera')
         lens = request.POST.getlist('lens')
-        self.current_user = request.user.pk 
+        current_user = request.user.pk 
         
         # PHOTOSHOOT
-        self.photoshoot = Photoshoot.objects.get(pk=id)
-        self.gear_id= Photoshoot.objects.filter(pk=id).values('gear_id')
-        self.event_id = PhotoshootHasGear.objects.filter(pk=self.gear_id).values('event_id')
-        self.event = Event.objects.get(pk=self.event_id)
+        photoshoot = Photoshoot.objects.get(pk=id)
+        gear_id= Photoshoot.objects.filter(pk=id).values('gear_id')
+        event_id = PhotoshootHasGear.objects.filter(pk=gear_id).values('event_id')
+        event = Event.objects.get(pk=event_id)
 
         # GEAR
-        self.gear = PhotoshootHasGear.objects.get(pk=self.gear_id)
-        self.camera = self.gear.camera.filter(safely_packed=True)
-        self.lens = self.gear.lens.filter(safely_packed=True)
+        gear = PhotoshootHasGear.objects.get(pk=gear_id)
+        camera = gear.camera.filter(safely_packed=True)
+        lens = gear.lens.filter(safely_packed=True)
  
         # Update gear to packed
         for c in camera:
-            pack_camera = CameraModel.objects.filter(pk=c).update(safely_packed=False)
+            pack_camera = CameraModel.objects.filter(pk=c.id).update(safely_packed=False)
 
-   
         for l in lens:
-            pack_lens = LensModel.objects.filter(pk=l).update(safely_packed=False)
+            pack_lens = LensModel.objects.filter(pk=l.id).update(safely_packed=False)
 
-        self.message = []
+
+        message = []
         
         # LENS
-        if (self.lens.count() == 0) and (self.camera.count() == 0):
+        if (lens.count() == 0) and (camera.count() == 0):
             # If all gear packed, set shoot to active
             active_photoshoot = Photoshoot.objects.filter(id=id).update(active=True)
             return HttpResponseRedirect(redirect_to='/success')
 
         else:  
-            # Display error message and list of items that returned False
-            self.message = "Oops! Keep Packing"  
+            # Display error message
+            message = "Oops! Keep Packing"  
 
-            return render(
-                request, 'create_pack_gear.html',{
-                'message': self.message,
-                'event': self.event,
-                'client_details': self.photoshoot,
-                'camera': self.camera,
-                'lens': self.lens,
+            return render(request, self.template_name,{
+                'message': message,
+                'event': event,
+                'client_details': photoshoot,
+                'camera': camera,
+                'lens': lens,
                 }
                 )

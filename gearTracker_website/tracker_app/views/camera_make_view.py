@@ -24,18 +24,16 @@ class CameraMakeView(TemplateView):
 
     def get(self, request):
 
-        self.all_camera_make = CameraMake.objects.all()
+        all_camera_make = CameraMake.objects.all()
 
-        return render(
-            request, 'create_camera_make.html', {
-            'camera_make': self.all_camera_make,
+        return render(request, self.template_name, {
+            'camera_make': all_camera_make,
             })
 
-
-
+    
     def post(self, request):
-        data = request.POST
 
+        data = request.POST
         name = data['camera_make']
 
         create_camera_brand = CameraMake.objects.create(

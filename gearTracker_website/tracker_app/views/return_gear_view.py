@@ -29,28 +29,26 @@ class ReturnGearView(TemplateView):
 
     template_name = 'create_return_gear.html'
 
-    
     def get(self, request, id):        
+        
         # Fetch the event
-        self.current_user = request.user.pk 
-        self.photoshoot = Photoshoot.objects.get(pk=id)
-        self.gear_id= Photoshoot.objects.filter(pk=id).values('gear_id')
-        self.event_id = PhotoshootHasGear.objects.filter(pk=self.gear_id).values('event_id')
-        self.event = Event.objects.get(pk=self.event_id)
+        current_user = request.user.pk 
+        photoshoot = Photoshoot.objects.get(pk=id)
+        gear_id= Photoshoot.objects.filter(pk=id).values('gear_id')
+        event_id = PhotoshootHasGear.objects.filter(pk=gear_id).values('event_id')
+        event = Event.objects.get(pk=event_id)
 
         # GEAR
-        self.gear = PhotoshootHasGear.objects.get(pk=self.gear_id)
-        self.camera = self.gear.camera.filter(customer=request.user.pk)
-        self.lens = self.gear.lens.filter(customer=request.user.pk)
+        gear = PhotoshootHasGear.objects.get(pk=gear_id)
+        camera = gear.camera.filter(customer=request.user.pk)
+        lens = gear.lens.filter(customer=request.user.pk)
 
-        return render(
-            request, 'create_return_gear.html',{
-            'client_details': self.photoshoot,
-            'event': self.event,
-            'camera': self.camera,
-            'lens': self.lens,
-            }
-            )
+        return render(request, self.template_name, {
+            'client_details': photoshoot,
+            'event': event,
+            'camera': camera,
+            'lens': lens,
+            })
 
 
 
@@ -60,11 +58,10 @@ class ReturnGearView(TemplateView):
         lens = request.POST.getlist('lens')
 
         # PHOTOSHOOT
-        self.photoshoot = Photoshoot.objects.get(pk=id)
-        self.gear_id= Photoshoot.objects.filter(pk=id).values('gear_id')
-        self.event_id = PhotoshootHasGear.objects.filter(pk=self.gear_id).values('event_id')
-        self.event = Event.objects.get(pk=self.event_id)
-
+        photoshoot = Photoshoot.objects.get(pk=id)
+        gear_id= Photoshoot.objects.filter(pk=id).values('gear_id')
+        event_id = PhotoshootHasGear.objects.filter(pk=gear_id).values('event_id')
+        event = Event.objects.get(pk=event_id)
 
         #Update gear that's been clicked to safe
         for c in camera:
@@ -73,14 +70,12 @@ class ReturnGearView(TemplateView):
         for l in lens:
             pack_lens = LensModel.objects.filter(pk=l).update(safely_packed=True)
 
-
         # Check to see if all gear has been packed
-        gear = PhotoshootHasGear.objects.get(pk=self.gear_id)
+        gear = PhotoshootHasGear.objects.get(pk=gear_id)
         missing_camera = gear.camera.filter(safely_packed=False)
         missing_lens = gear.lens.filter(safely_packed=False)
         message = []
         
-
         # If all gear packed, redirect
         if (missing_lens.count() == 0) and (missing_camera.count() == 0):            
             # If all gear packed, set shoot to inactive
@@ -99,11 +94,10 @@ class ReturnGearView(TemplateView):
                 flag_missing_lens = LensModel.objects.filter(pk=l.pk).update(missing=True)
                 
             
-            return render(
-                request, 'create_return_gear.html',{
+            return render(request, self.template_name,{
                 'message': message,
-                'client_details': self.photoshoot,
-                'event': self.event,
+                'client_details': photoshoot,
+                'event': event,
                 'camera': missing_camera,
                 'lens': missing_lens,
                 })

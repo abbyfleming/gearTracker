@@ -21,8 +21,6 @@ class Register(TemplateView):
 
     template_name = 'register.html'
 
-
-
 def register_customer(request):
     data = request.POST
 
@@ -32,7 +30,6 @@ def register_customer(request):
         email = data['email'],
         username = data['username'], 
         password = data['password'],
-
         )
 
     Customer.objects.create(

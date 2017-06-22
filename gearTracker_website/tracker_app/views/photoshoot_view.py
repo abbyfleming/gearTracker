@@ -33,19 +33,17 @@ class PhotoShootView(TemplateView):
         today = datetime.now()
 
         #current user
-        self.current_customer = request.user.pk
+        current_customer = request.user.pk
 
         # get current 
-        self.lens = LensModel.objects.filter(customer=request.user.pk)
-        self.event = PhotoshootHasGear.objects.filter(lens=self.lens)
-        # self.event = PhotoshootHasGear.objects.all()
+        lens = LensModel.objects.filter(customer=request.user.pk)
+        event = PhotoshootHasGear.objects.filter(lens=lens)
 
-        self.photoshoot = Photoshoot.objects.filter(customer=request.user.pk).filter(date__gte=today).order_by('date')
+        photoshoot = Photoshoot.objects.filter(customer=request.user.pk).filter(date__gte=today).order_by('date')
 
-        return render(
-            request, 'create_photoshoot.html',{
-            'event': self.event,
-            'photoshoot': self.photoshoot,
+        return render(request, self.template_name, {
+            'event': event,
+            'photoshoot': photoshoot,
             })
 
     
@@ -73,9 +71,3 @@ class PhotoShootView(TemplateView):
 
         # Redirect to same page
         return HttpResponseRedirect("/photoshoot")
-
-
-    
-    
-
-  

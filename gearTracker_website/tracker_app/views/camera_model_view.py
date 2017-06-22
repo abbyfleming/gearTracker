@@ -26,19 +26,17 @@ class CameraModelView(TemplateView):
     def get(self, request):
 
         # Fetch the camera brands
-        self.all_camera_makes = CameraMake.objects.all()
-        self.customer_camera = CameraModel.objects.filter(customer=request.user.pk)
+        all_camera_makes = CameraMake.objects.all()
+        customer_camera = CameraModel.objects.filter(customer=request.user.pk)
 
-        return render(
-            request, 'create_camera_model.html', {
-            'camera_make': self.all_camera_makes,
-            'customer_camera': self.customer_camera,
+        return render(request, self.template_name, {
+            'camera_make': all_camera_makes,
+            'customer_camera': customer_camera,
             })
 
 
     def post(self, request):
         data = request.POST
-
 
         # Fetch the data from the Form
         make = data['camera_list']
