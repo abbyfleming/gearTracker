@@ -24,17 +24,15 @@ class EventView(TemplateView):
 
     def get(self, request):
 
-        self.all_events = Event.objects.all()
+        all_events = Event.objects.all()
 
-        return render(
-            request, 'create_event.html',
-            {'event': self.all_events,}
-            )
+        return render(request, self.template_name, {
+            'event': all_events,
+            })
 
 
     def post(self, request):
         data = request.POST
-
         name = data['event']
 
         create_event = Event.objects.create(
