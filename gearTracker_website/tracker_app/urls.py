@@ -12,10 +12,6 @@ urlpatterns = [
     url(r'^register_customer/', views.register_view.register_customer, name='register_customer'),
     url(r'^logout/',  views.login_view.logout_view, name='logout'),
 
-    # Camera 
-    url(r'^add-camera/', views.camera_model_view.CameraModelView.as_view() , name='camera'),
-    url(r'^add-camera-make/', views.camera_make_view.CameraMakeView.as_view() , name='add-camera-make'),
-
     # Lens 
     url(r'^add-lens/', views.lens_model_view.LensModelView.as_view() , name='lens'),
     url(r'^add-lens-make/', views.lens_make_view.LensMakeView.as_view() , name='add-lens-make'),

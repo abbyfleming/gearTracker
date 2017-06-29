@@ -1,6 +1,5 @@
 from django.db import models
 from .customer import Customer
-from .camera_make import CameraMake
 from .event_has_gear import PhotoshootHasGear
 
 

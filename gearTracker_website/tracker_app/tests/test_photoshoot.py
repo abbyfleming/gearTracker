@@ -7,8 +7,6 @@ sys.path.append('../')
 from tracker_app.models.customer import Customer
 from tracker_app.models.lens_make import LensMake
 from tracker_app.models.lens_model import LensModel
-from tracker_app.models.camera_make import CameraMake
-from tracker_app.models.camera_model import CameraModel
 from tracker_app.models.event import Event
 from tracker_app.models.event_has_gear import PhotoshootHasGear
 from tracker_app.models.photoshoot import Photoshoot
@@ -47,28 +45,14 @@ class TestPhotoshoot(TestCase):
 			)
 		self.nikkor.save()
 
-		self.nikon = CameraMake(
-			name = "Nikon"
-			)
-		self.nikon.save()
-
 		self.zoom = LensModel(
 			customer = self.suzy,
-			mount = self.nikon,
 			lens_make = self.nikkor,
 			min_focal_length = 70,
 			max_focal_length = 200,
 			aperature = 2.8,
 			)
 		self.zoom.save()
-
-
-		self.d700 = CameraModel(
-			customer = self.suzy,
-			camera_make = self.nikon,
-			name = "D700",
-			)
-		self.d700.save()
 
 		self.wedding = Event(
 			name = "Wedding"
@@ -78,7 +62,6 @@ class TestPhotoshoot(TestCase):
 		self.wedding_has_gear = PhotoshootHasGear.objects.create(
 			event = self.wedding, 
 			)
-		self.wedding_has_gear.camera.add(self.d700)
 		self.wedding_has_gear.lens.add(self.zoom)
 
 		self.photoshoot = Photoshoot(

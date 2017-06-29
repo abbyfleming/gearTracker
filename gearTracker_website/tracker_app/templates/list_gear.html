@@ -8,21 +8,10 @@
 			{{l.lens_make}} {{l.min_focal_length}}-{{l.max_focal_length}} {{l.aperature}}<br/>
 		{% endfor %}
 
-	<h2>Camera</h2>
-		{% for c in camera %}
-			{{c.name}}<br/>
-		{% endfor %}
-
-
 	<h2>Missing</h2>
 	
 		<form action="{% url 'tracker_app:list_gear' %}" method="post">
 		{% csrf_token %}
-
-		{% for cam in missing_camera %}
-			<input type="checkbox" name="camera" value="{{cam.id}}"> 
-			{{cam.name}} - missing<br/>
-		{% endfor %}
 		
 		{% for lens in missing_lens %}
 			<input type="checkbox" name="lens" value="{{lens.id}}"> 

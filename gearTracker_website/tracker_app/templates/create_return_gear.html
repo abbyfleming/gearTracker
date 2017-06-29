@@ -15,9 +15,6 @@
 		<h2>Missing Gear</h2>
 
 		<div class="form-group">
-		{% for c in camera %}
-			{{c.camera_make.name}} {{c.name}}</br>
-		{% endfor %}
 
 		{% for l in lens %}
 			{{l.lens_make}} {{l.min_focal_length}}-{{l.max_focal_length}} {{l.aperature}} <br/>
@@ -32,10 +29,6 @@
 		{% csrf_token %}
 
 		<div class="form-group">
-		{% for c in camera %}
-			<input type="checkbox" name="camera" value="{{c.id}}"> 
-			{{c.camera_make.name}} {{c.name}}</br>
-		{% endfor %}
 
 		{% for l in lens %}
 			<input type="checkbox" name="lens" value="{{l.id}}"> 
