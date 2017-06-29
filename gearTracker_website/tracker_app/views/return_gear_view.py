@@ -6,7 +6,6 @@ from django.http import HttpResponseRedirect
 
 
 from tracker_app.models import LensModel
-from tracker_app.models import CameraModel
 from tracker_app.models import Customer
 from tracker_app.models import PhotoshootHasGear
 from tracker_app.models import Event
@@ -19,7 +18,7 @@ class ReturnGearView(TemplateView):
         Allow a user to return their gear for an event. Flag gear as "missing" if an item isn't returned
 
     get:
-        Returns client details, event, camera, lens
+        Returns client details, event, lens
     
     post:
         Selected items will be updated to safely_packed
@@ -40,13 +39,11 @@ class ReturnGearView(TemplateView):
 
         # GEAR
         gear = PhotoshootHasGear.objects.get(pk=gear_id)
-        camera = gear.camera.filter(customer=request.user.pk)
         lens = gear.lens.filter(customer=request.user.pk)
 
         return render(request, self.template_name, {
             'client_details': photoshoot,
             'event': event,
-            'camera': camera,
             'lens': lens,
             })
 
@@ -54,7 +51,6 @@ class ReturnGearView(TemplateView):
 
     def post(self, request, id):
         # Get data from Form
-        camera = request.POST.getlist('camera')        
         lens = request.POST.getlist('lens')
 
         # PHOTOSHOOT
@@ -64,20 +60,16 @@ class ReturnGearView(TemplateView):
         event = Event.objects.get(pk=event_id)
 
         #Update gear that's been clicked to safe
-        for c in camera:
-            pack_camera = CameraModel.objects.filter(pk=c).update(safely_packed=True)
-   
         for l in lens:
             pack_lens = LensModel.objects.filter(pk=l).update(safely_packed=True)
 
         # Check to see if all gear has been packed
         gear = PhotoshootHasGear.objects.get(pk=gear_id)
-        missing_camera = gear.camera.filter(safely_packed=False)
         missing_lens = gear.lens.filter(safely_packed=False)
         message = []
         
         # If all gear packed, redirect
-        if (missing_lens.count() == 0) and (missing_camera.count() == 0):            
+        if (missing_lens.count() == 0):            
             # If all gear packed, set shoot to inactive
             # active_photoshoot = Photoshoot.objects.filter(id=id).update(active=False)
             return HttpResponseRedirect(redirect_to='/success')
@@ -87,17 +79,12 @@ class ReturnGearView(TemplateView):
             
             message = "Marked As Missing" 
 
-            for c in missing_camera:
-                flag_missing_camera = CameraModel.objects.filter(pk=c.pk).update(missing=True)
-   
             for l in missing_lens:
-                flag_missing_lens = LensModel.objects.filter(pk=l.pk).update(missing=True)
-                
+                flag_missing_lens = LensModel.objects.filter(pk=l.pk).update(missing=True)                
             
             return render(request, self.template_name,{
                 'message': message,
                 'client_details': photoshoot,
                 'event': event,
-                'camera': missing_camera,
                 'lens': missing_lens,
                 })

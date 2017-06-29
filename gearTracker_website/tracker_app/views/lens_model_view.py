@@ -6,7 +6,6 @@ from django.http import HttpResponseRedirect
 
 from tracker_app.models import LensMake
 from tracker_app.models import LensModel
-from tracker_app.models import CameraMake
 from tracker_app.models import Customer
 
 
@@ -16,7 +15,7 @@ class LensModelView(TemplateView):
         Allow a user to create a lens model (ie: Nikon Nikkor 24-70 2.8)
 
     get: 
-        Returns camera make, lens make, and lens
+        Returns lens make, and lens
     
     post: 
         Create a lens
@@ -27,15 +26,13 @@ class LensModelView(TemplateView):
 
     def get(self, request):
 
-        # Fetch the camera brands
+        # Fetch the lens brands
         all_lens_makes = LensMake.objects.all()
-        all_camera_makes = CameraMake.objects.all()
         customer_lens = LensModel.objects.filter(customer=request.user.pk)
 
         
         return render(request, self.template_name, {
             'lens_make': all_lens_makes,
-            'camera_make': all_camera_makes,
             'customer_lens': customer_lens, 
             })
 
@@ -45,21 +42,18 @@ class LensModelView(TemplateView):
 
         # Fetch the data from the Form
         make = data['lens_list']
-        mount = data['camera_list']
         min_focal = data['min_focal']
         max_focal = data['max_focal']
         aperature = data['aperature']
     
         # Find the values of the FK
         customer = Customer.objects.get(user=request.user.pk) 
-        camera = CameraMake.objects.get(pk=mount)    
         lens = LensMake.objects.get(pk=make)
 
 
         # Create the lens!
-        create_camera_model = LensModel.objects.create(
+        create_lens_model = LensModel.objects.create(
             customer = customer,
-            mount = camera,
             lens_make = lens,
             min_focal_length = min_focal,
             max_focal_length = max_focal,

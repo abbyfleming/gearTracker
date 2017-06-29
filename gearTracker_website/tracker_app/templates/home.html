@@ -14,13 +14,6 @@
 		</div>
 		
 		<div class="col-md-4">
-			<h2>Camera</h2>
-			{% for c in camera %}
-				<p>{{c.camera_make.name}} {{c.name}}</p>
-			{% endfor %}
-		 </div>
-		
-		<div class="col-md-4">
 			<h2>Lens</h2>
 			{% for l in lens %}
 				<p>{{l.lens_make}} {{l.min_focal_length}} - {{l.max_focal_length}} {{l.aperature}}</p>

@@ -1,9 +1,6 @@
 from django.db import models
 from .customer import Customer
 from .lens_make import LensMake
-from .camera_make import CameraMake
-
-
 
 class LensModel(models.Model):
 	'''
@@ -12,7 +9,6 @@ class LensModel(models.Model):
 
 	Properties: 
 		customer - ForeignKey to Customer
-		mount - ForeignKey to CameraMake
 		lens_make - ForeignKey to LensMake
 		min_focal_length - PositiveIntegerField
 		max_focal_length - PositiveIntegerField
@@ -26,7 +22,6 @@ class LensModel(models.Model):
 	'''
 
 	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-	mount = models.ForeignKey(CameraMake, on_delete=models.CASCADE)
 	lens_make = models.ForeignKey(LensMake, on_delete=models.CASCADE)
 	min_focal_length = models.PositiveIntegerField()
 	max_focal_length = models.PositiveIntegerField()
@@ -36,8 +31,7 @@ class LensModel(models.Model):
 
 	
 	def __str__(self):
-		return "{} {} {} {} {}".format(
-							self.mount.name,
+		return "{} {} {} {}".format(
 							self.lens_make.name, 
 							self.min_focal_length, 
 							self.max_focal_length,

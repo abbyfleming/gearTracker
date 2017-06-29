@@ -6,7 +6,6 @@ from django.http import HttpResponseRedirect
 
 
 from tracker_app.models import LensModel
-from tracker_app.models import CameraModel
 from tracker_app.models import Customer
 from tracker_app.models import PhotoshootHasGear
 from tracker_app.models import Event
@@ -19,10 +18,10 @@ class PackGearView(TemplateView):
         Allow a user to pack their gear for an event. Notify user is gear has not been packed.
 
     get:
-        Returns client details, event, camera, lens
+        Returns client details, event, lens
     
     post:
-        Update camera, lens to not safely packed (false)
+        Update lens to not safely packed (false)
         and add a message (if a gear item has not been packed)
     '''
 
@@ -38,13 +37,11 @@ class PackGearView(TemplateView):
 
         # GEAR
         gear = PhotoshootHasGear.objects.get(pk=gear_id)
-        camera = gear.camera.filter(customer=request.user.pk)
         lens = gear.lens.filter(customer=request.user.pk)
 
         return render(request, self.template_name, {
             'client_details': photoshoot,
             'event': event,
-            'camera': camera,
             'lens': lens,
             })
 
@@ -52,7 +49,6 @@ class PackGearView(TemplateView):
     def post(self, request, id):
 
         # Get data from Form
-        camera = request.POST.getlist('camera')
         lens = request.POST.getlist('lens')
         current_user = request.user.pk 
         
@@ -64,13 +60,9 @@ class PackGearView(TemplateView):
 
         # GEAR
         gear = PhotoshootHasGear.objects.get(pk=gear_id)
-        camera = gear.camera.filter(safely_packed=True)
         lens = gear.lens.filter(safely_packed=True)
  
         # Update gear to packed
-        for c in camera:
-            pack_camera = CameraModel.objects.filter(pk=c.id).update(safely_packed=False)
-
         for l in lens:
             pack_lens = LensModel.objects.filter(pk=l.id).update(safely_packed=False)
 
@@ -78,7 +70,7 @@ class PackGearView(TemplateView):
         message = []
         
         # LENS
-        if (lens.count() == 0) and (camera.count() == 0):
+        if (lens.count() == 0):
             # If all gear packed, set shoot to active
             active_photoshoot = Photoshoot.objects.filter(id=id).update(active=True)
             return HttpResponseRedirect(redirect_to='/success')
@@ -91,7 +83,6 @@ class PackGearView(TemplateView):
                 'message': message,
                 'event': event,
                 'client_details': photoshoot,
-                'camera': camera,
                 'lens': lens,
                 }
                 )
